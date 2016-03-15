@@ -25,10 +25,14 @@ function getCourses(courses) {
 	var course_list = [];
 	//iterate over all of the courses in the list of type
 	for (var i = 0; i < courses.length; i++) {
+		if (courses[i].id == "000004") {
+			continue;
+		}
 		//add its attributes to the string representation
 		var course = "<b>Course ID:</b> " + courses[i].id + "<br />";
 		course += "<b>Credits:</b> " + courses[i].credits + "<br />";
 		course += "<b>Required:</b> " + courses[i].required + "<br />";
+		course += "<b>Senior:</b> " + courses[i].senior + "<br />";
 		course += "<b>Course Name:</b> " + courses[i].name + "<br />";
 		course += "<b>Course Description:</b><br />" + courses[i].desc + "<br />";
 

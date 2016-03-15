@@ -42,6 +42,7 @@ while ($course) {
 	$json .= "\t\t\t\"type\": \"" . $course["course_type"] . "\",\n";
 	$json .= "\t\t\t\"credits\": \"" . $course["course_credits"] . "\",\n";
 	$json .= "\t\t\t\"required\": \"" . $course["course_required"] . "\",\n";
+	$json .= "\t\t\t\"senior\": \"" . $course["course_senior"] . "\",\n";
 	$json .= "\t\t\t\"name\": \"" . $course["course_name"] . "\",\n";
 	$json .= "\t\t\t\"desc\": \"" . $course["course_desc"] . "\",\n";
 
@@ -63,8 +64,7 @@ while ($course) {
 
 			//generate the prerequisite course for json
 			$json .= "\n\t\t\t\t{\n";
-			$json .= "\t\t\t\t\t\"id\": \"" . $course["prereq_id"] . "\",\n";
-			$json .= "\t\t\t\t\t\"type\": \"" . $course["prereq_type"] . "\"\n";
+			$json .= "\t\t\t\t\t\"id\": \"" . $course["prereq_id"] . "\"\n";
 			$json .= "\t\t\t\t}";
 
 			if ($prereqs > 1 && $i < $prereqs - 1) {
