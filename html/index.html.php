@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>CMSC Degree Tracker</title>
-	<link rel="stylesheet" href="styling.css">
+	<link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
