@@ -1,28 +1,36 @@
-select{
-	width:200px;
-	margin-right:10px;
+#northWest {
+	float: left;
 }
-textarea{
-	width:290px;
-	height:75px;
-	
+#northEast {
+	float: left;
+	margin-left: 50px;
 }
-.optionButton{
-	width:110px;
-	height:30px;
+#south {
+	float: left;
+	text-align: center;
+}
+textarea {
+	width: 290px;
+	height: 75px;	
 }
 
-#northWest{
-	float:left;
+.clear {
+	clear: both;
 }
-#northEast{
-	float:left;
-	margin-left:50px;
+
+.optionButton {
+	width: 110px;
+	height: 30px;
 }
-#south{
-	float:left;
-	text-align:center;
+
+.course-section {
+	float: left;
 }
-#clearLeft{
-	clear:left;
+.course-section > select {
+	width: 200px;
+	margin-right: 10px;
+}
+.course-section > p {
+	padding-right: 10px;
+	text-align: center;
 }
