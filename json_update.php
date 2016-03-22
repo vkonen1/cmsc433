@@ -17,7 +17,8 @@ if (!$mysql) {
 $db = mysql_select_db("cmsc433", $mysql);
 
 //query for the data
-$query = "SELECT c.*, p.* FROM Courses c INNER JOIN Courses_Prereqs cp ON cp.course_id = c.course_id INNER JOIN Prereqs p ON p.prereq_id = cp.prereq_id";
+$query = "SELECT c.*, p.* FROM Courses c INNER JOIN Courses_Prereqs cp ON cp.course_id = c.course_id INNER JOIN Prereqs p ON p.prereq_id = cp.prereq_id
+	ORDER BY c.course_name";
 $result = mysql_query($query);
 if (!$result) {
 	die("Error: " . mysql_error() . "<br />Query: " . $query);

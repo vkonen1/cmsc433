@@ -18,10 +18,9 @@
 				<input type="submit" value="Submit">
 				<br> <br> <br>
 			</form>
-			<form>
-				<input type="submit" class="optionButton" value="CMSC">
-				<input type="submit" class="optionButton" value="SCI">
-			</form>
+			<button type="button" id="computer-button" class="tab-button" onclick="changeTab('cmsc')">Computer</button>
+			<button type="button" id="math-button" class="tab-button" onclick="changeTab('math')">Math</button>
+			<button type="button" id="science-button" class="tab-button" onclick="changeTab('sci')">Science</button>
 		</div>
 
 		<div id="northEast">
@@ -32,22 +31,59 @@
 
 		<div class="clear"></div>
 
-		<!--  Select Box -->
-		<div class="course-section">
-			<select id="course-available" size="18"></select>
-			<p>Class Available</p>
-		</div>
+		<!-- Select Boxes -->
+		<!-- Computer Science -->
+		<div id="cmsc">
+			<div class="course-section">
+				<select id="cmsc-course-available" size="18"></select>
+				<p>Class Available</p>
+			</div>
 
-		<div class="course-section">
-			<select id="course-taken" size="18"></select>
-			<p>Classes Taken</p>
-		</div>
+			<div class="course-section">
+				<select id="cmsc-course-taken" size="18"></select>
+				<p>Classes Taken</p>
+			</div>
 
-		<div class="course-section">
-			<select id="course-options" size="18"></select>
-			<p>Class Options</p>
+			<div class="course-section">
+				<select id="cmsc-course-options" size="18"></select>
+				<p>Class Options</p>
+			</div>
 		</div>
-		<!-- End of Select Box-->
+		<!-- Math -->
+		<div id="math" style="display: none;">
+			<div class="course-section">
+				<select id="math-course-available" size="18"></select>
+				<p>Class Available</p>
+			</div>
+
+			<div class="course-section">
+				<select id="math-course-taken" size="18"></select>
+				<p>Classes Taken</p>
+			</div>
+
+			<div class="course-section">
+				<select id="math-course-options" size="18"></select>
+				<p>Class Options</p>
+			</div>
+		</div>
+		<!-- Science -->
+		<div id="sci" style="display: none;">
+			<div class="course-section">
+				<select id="sci-course-available" size="18"></select>
+				<p>Class Available</p>
+			</div>
+
+			<div class="course-section">
+				<select id="sci-course-taken" size="18"></select>
+				<p>Classes Taken</p>
+			</div>
+
+			<div class="course-section">
+				<select id="sci-course-options" size="18"></select>
+				<p>Class Options</p>
+			</div>
+		</div>
+		<!-- End of Select Boxes -->
 
 		<!-- For debugging class population -->
 		<div class="clear"></div>
