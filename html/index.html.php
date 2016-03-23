@@ -24,9 +24,7 @@
 		</div>
 
 		<div id="northEast">
-			<textarea disabled>
-			Tooltip?
-			</textarea>
+			<textarea id="tooltip" disabled></textarea>
 		</div>
 
 		<div class="clear"></div>

@@ -65,6 +65,35 @@ function changeTab(type) {
 }
 
 /*
+updates the tooltip inner html based on the course id provided
+*/
+function updateTooltip(id) {
+	//get the course object
+	var course = findCourse(id);
+
+	//basic info
+	var course_display = "";
+	course_display += "Course Name: " + course.name + "<br />";
+	course_display += "Course Description:<br />" + course.desc + "<br />";
+	course_display += "Prerequisites:<br />";
+
+	//prereqs
+	var prereqs = course.prereqs;
+	if (prereqs.length == 0) {
+		course_display += "None<br />"
+	} else {
+		for (var i = 0; i < prereqs.length; i++) {
+			var prereq = findCourse(prereqs[i].id);
+			course_display += prereq.name + "<br />";
+		}		
+	}
+	course_display += "<br />";
+
+	//update the tooltip
+	document.getElementById("tooltip").innerHTML = course_display;
+}
+
+/*
 returns the object representing the course from the array of courses with a course id of id
 */
 function findCourse(id) {
@@ -191,7 +220,9 @@ function updateSelections(type) {
 	for (var i = 0; i < courses_available[type].length; i++) {
 		available_select_content += "<option value=\"";
 		available_select_content += courses_available[type][i].id;
-		available_select_content += "\" onclick=\"classTaken('";
+		available_select_content += "\" onmouseover=\"updateTooltip('";
+		available_select_content += courses_available[type][i].id;
+		available_select_content += "')\" onclick=\"classTaken('";
 		available_select_content += courses_available[type][i].id;
 		available_select_content += "', '";
 		available_select_content += type;
@@ -206,7 +237,9 @@ function updateSelections(type) {
 	for (var i = 0; i < courses_taken[type].length; i++) {
 		taken_select_content += "<option value=\"";
 		taken_select_content += courses_taken[type][i].id;
-		taken_select_content += "\" onclick=\"classUntaken('";
+		taken_select_content += "\" onmouseover=\"updateTooltip('";
+		taken_select_content += courses_taken[type][i].id;
+		taken_select_content += "')\" onclick=\"classTaken('";
 		taken_select_content += courses_taken[type][i].id;
 		taken_select_content += "', '";
 		taken_select_content += type;
@@ -221,7 +254,9 @@ function updateSelections(type) {
 	for (var i = 0; i < courses_options[type].length; i++) {
 		options_select_content += "<option value=\"";
 		options_select_content += courses_options[type][i].id;
-		options_select_content += "\">";
+		options_select_content += "\" onmouseover=\"updateTooltip('"
+		options_select_content += courses_options[type][i].id;
+		options_select_content += "')\">";
 		options_select_content += courses_options[type][i].name;
 		options_select_content += "</option>";
 	}

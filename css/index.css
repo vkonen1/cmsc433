@@ -9,7 +9,7 @@
 	float: left;
 	text-align: center;
 }
-textarea {
+#tooltip {
 	width: 290px;
 	height: 75px;	
 }
