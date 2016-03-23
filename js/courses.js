@@ -276,6 +276,25 @@ function updateOptions(type) {
 	for (var i = 0; i < courses_available[type].length; i++) {
 		var option = true;
 
+		//special case to see if cmsc447 is an option
+		if (type == "cmsc" && courses_available["cmsc"][i].id == "101927") {
+			var senior_requirement = false;
+			//iterate over the cmsc courses taken array
+			for (var j = 0; j < courses_taken["cmsc"].length; j++) {
+				//if a senior course is found, set and break
+				if (courses_taken["cmsc"][j].senior == "1") {
+					senior_requirement = true;
+					break;
+				}
+			}
+
+			//cmsc447 is an option, push it to the cmsc course options array
+			if (senior_requirement) {
+				courses_options["cmsc"].push(courses_available["cmsc"][i]);
+				continue;
+			}
+		}
+
 		//iterate over the prerequisite courses for this course object
 		var prereqs = courses_available[type][i].prereqs;
 		for (var j = 0; j < prereqs.length; j++) {
