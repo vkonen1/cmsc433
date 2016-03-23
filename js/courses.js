@@ -239,7 +239,7 @@ function updateSelections(type) {
 		taken_select_content += courses_taken[type][i].id;
 		taken_select_content += "\" onmouseover=\"updateTooltip('";
 		taken_select_content += courses_taken[type][i].id;
-		taken_select_content += "')\" onclick=\"classTaken('";
+		taken_select_content += "')\" onclick=\"classUntaken('";
 		taken_select_content += courses_taken[type][i].id;
 		taken_select_content += "', '";
 		taken_select_content += type;
