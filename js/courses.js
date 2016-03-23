@@ -45,10 +45,10 @@ courses_options["sci"] = [];
 
 /*
 init()
-parses the JSON file with all of the course objects; defines a set order for
+Parses the JSON file with all of the course objects; Defines a set order for
 the course objects based on the order of the JSON file to be used for inserstion
-into course object containers;
-Calls Sequentially:
+into course object containers; Then calls sequentially the following:
+
 updateAllCourses()    - update the available courses object containers
 updateAllOptions()    - update the options courses object containers for all
 						course types
@@ -87,93 +87,121 @@ function init() {
 }
 
 /*
-changes the current active boxes to type
+changeTab(type)
+type - type of courses (cmsc, math, sci)
+Displays the active tab based on type and hides the others
 */
 function changeTab(type) {
+	//get all of the tabs and hide them
 	var tabs = document.getElementsByClassName("tab");
-
 	for (var i = 0; i < tabs.length; i++) {
 		tabs[i].style.display = "none";
 	}
 	
+	//display the active tab based on type
 	document.getElementById(type + "-tab").style.display = "inline";
 }
 
 /*
-updates the tooltip inner html based on the course id provided
+updateTooltip(id)
+id - course id corresponding to a course object in the courses array
+Writes the course information associated with the provided course id to the
+innerHTML of the element with id "tooltip"
 */
 function updateTooltip(id) {
-	//get the course object
+	//get the course object based on id
 	var course = findCourse(id);
 
-	//basic info
-	var course_display = "";
-	course_display += "Course Name: " + course.name + "<br />";
-	course_display += "Course Description:<br />" + course.desc + "<br />";
-	course_display += "Prerequisites:<br />";
+	//format the course information from the course object
+	var course_info = "";
+	course_info += "Course Name: " + course.name + "<br />";
+	course_info += "Course Description:<br />" + course.desc + "<br />";
+	course_info += "Prerequisites:<br />";
 
-	//prereqs
+	//format the prerequisite courses
 	var prereqs = course.prereqs;
 	if (prereqs.length == 0) {
-		course_display += "None<br />"
+		course_info += "None<br />"
 	} else {
+		/* 
+		get the course objects for each prerequisite course and format the
+		information from that course object
+		*/
 		for (var i = 0; i < prereqs.length; i++) {
 			var prereq = findCourse(prereqs[i].id);
-			course_display += prereq.name + "<br />";
+			course_info += prereq.name + "<br />";
 		}		
 	}
-	course_display += "<br />";
+	course_info += "<br />";
 
-	//update the tooltip
-	document.getElementById("tooltip").innerHTML = course_display;
+	//write the course info to the innerHTML of the element with id "tooltip"
+	document.getElementById("tooltip").innerHTML = course_info;
 }
 
 /*
-returns the object representing the course from the array of courses with a course id of id
+findCourse(id)
+id - course id corresponding to a course object in the courses array
+Finds the course object in the courses array with the matching course id and
+returns it; Returns null if it does not exist
 */
 function findCourse(id) {
-	//search through the courses
+	//iterate over the courses array
 	for (var i = 0; i < courses.length; i++) {
 		//found the course, return it
 		if (courses[i].id == id) {
 			return courses[i];
 		}
 	}
-	//doesn't exist (should never happen)
+
+	//course object does not exist
 	return null;
 }
 
 /*
-returns the index in course_list that holds the course object with id of id
+findCourseIndex(id, course_list)
+id 			- course id corresponding to a course object in the provided
+			  course_list array
+course_list - an array of course objects
+Finds the index of the course object in the provided course_list array with the
+matching course id and returns it; Returns -1 if it does not exist
 */
 function findCourseIndex(id, course_list) {
-	//search through the courses provided
+	//iterate over the provided course_list array
 	for (var i = 0; i < course_list.length; i++) {
 		//found the course, return the index
 		if (course_list[i].id == id) {
 			return i;
 		}
 	}
-	//not in array
+
+	//course object does not exist
 	return -1;
 }
 
-/* inserts course into course_list based on the order attribute */
+/*
+insertCourse(course, course_list)
+course 		- a course object
+course_list - an array of course objects
+Inserts course into course_list based on the order attribute of the course
+objects
+*/
 function insertCourse(course, course_list) {
-	//insert into the array in the correct order if possible
+	//iterate over the provided course_list array
 	for (var i = 0; i < course_list.length; i++) {
+		//found the correct place, insert it and return
 		if (course.order < course_list[i].order) {
 			course_list.splice(i, 0, course);
 			return;
 		}
 	}
 
-	//push to the end of the array if it was not inserted
+	//push to the end of the course_list array if it was not inserted
 	course_list.push(course);
 }
 
 /*
-loads course arrays
+updateAllCourses()
+Calls updatesCourses() on every course type (cmsc, math, sci)
 */
 function updateAllCourses() {
 	updateCourses("cmsc");
@@ -182,16 +210,22 @@ function updateAllCourses() {
 }
 
 /*
-loads available course of type into appropriate array
+updateCourses(type)
+type - type of courses (cmsc, math, sci)
+Pushes all of the course objects from the courses array that has type matching
+the provided type to the available courses array of the provided type
 */
 function updateCourses(type) {
+	//reset the available courses array for the provided type
 	courses_available[type] = [];
-	//iterate over all of the courses in the courses array
+	//iterate over the courses array
 	for (var i = 0; i < courses.length; i++) {
 		//skip the dummy course (prereq for cmsc447)
 		if (courses[i].id == "000004") {
 			continue;
 		}
+
+		//push the course object to the available courses for the provided type
 		if (courses[i].type == type) {
 			courses_available[type].push(courses[i]);
 		}
@@ -199,7 +233,8 @@ function updateCourses(type) {
 }
 
 /*
-updates all the options
+updateAllOptions()
+Calls updatesOptions() on every course type (cmsc, math, sci)
 */
 function updateAllOptions() {
 	updateOptions("cmsc");
@@ -208,17 +243,25 @@ function updateAllOptions() {
 }
 
 /*
-updates the array of options based on the classes that have been taken
+updateOptions(type)
+type - type of courses (cmsc, math, sci)
+Pushes the course objects from the available courses array of the provided type
+that can be taken, based on the courses that exist in the taken course arrays of
+all course type, to the course options array of the provided type
 */
 function updateOptions(type) {
 	courses_options[type] = [];
-	//loop over the available classes
+	//iterate over the available courses array for the provided type
 	for (var i = 0; i < courses_available[type].length; i++) {
 		var option = true;
-		//loops over the prereqs
+
+		//iterate over the prerequisite courses for this course object
 		var prereqs = courses_available[type][i].prereqs;
 		for (var j = 0; j < prereqs.length; j++) {
-			//if it hasn't been taken, the class is not an option
+			/*
+			determine if this course is an option based on the course objects
+			that exist in the taken courses arrays of all course types
+			*/
 			if (findCourseIndex(prereqs[j].id, courses_taken["cmsc"]) == -1 &&
 				findCourseIndex(prereqs[j].id, courses_taken["math"]) == -1 &&
 				findCourseIndex(prereqs[j].id, courses_taken["sci"]) == -1) {
@@ -226,6 +269,11 @@ function updateOptions(type) {
 				break;
 			}
 		}
+
+		/*
+		push this course object to the course options array of the provided type
+		based on the criteria evaluated above
+		*/
 		if (option) {
 			courses_options[type].push(courses_available[type][i]);
 		}
@@ -233,7 +281,8 @@ function updateOptions(type) {
 }
 
 /*
-updates the html for all select boxes
+updateAllSelections()
+Calls updatesSelections() on every course type (cmsc, math, sci)
 */
 function updateAllSelections() {
 	updateSelections("cmsc");
@@ -241,18 +290,33 @@ function updateAllSelections() {
 	updateSelections("sci");
 }
 
-/* updates the html of the select boxes for type with data from the passed in arrays */
+/*
+updateSelections(type)
+type - type of courses (cmsc, math, sci)
+Updates the contents of the select elements associated with the provided type
+based on the course container arrays of the provided type (available, taken,
+options)
+*/
 function updateSelections(type) {
+	//get the select elements associated with the provided type
 	var available_select = document.getElementById(type + "-available");
 	var taken_select = document.getElementById(type + "-taken");
 	var options_select = document.getElementById(type + "-options");
 
+	//initialize the contents to be written to their innerHTMLs
 	var available_select_content = "";
 	var taken_select_content = "";
 	var options_select_content = "";
 
-	//update available courses
+	//iterate over the available courses of the provided type
 	for (var i = 0; i < courses_available[type].length; i++) {
+		/*
+		generate a select option for each course object; attributes:
+		value 		- value of the option is the course object id
+		onmouseover - call updateTooltip(id) with the course object id
+		onclick 	- call classTaken(id, type) with the course object id and
+					  type
+		*/
 		available_select_content += "<option value=\"";
 		available_select_content += courses_available[type][i].id;
 		available_select_content += "\" onmouseover=\"updateTooltip('";
@@ -261,15 +325,20 @@ function updateSelections(type) {
 		available_select_content += courses_available[type][i].id;
 		available_select_content += "', '";
 		available_select_content += type;
-		available_select_content += "')\" class=\"";
-		available_select_content += type;
-		available_select_content += "\">";
+		available_select_content += "')\">";
 		available_select_content += courses_available[type][i].name;
 		available_select_content += "</option>";
 	}
 
-	//update taken courses
+	//iterate over the taken courses of the provided type
 	for (var i = 0; i < courses_taken[type].length; i++) {
+		/*
+		generate a select option for each course object; attributes:
+		value 		- value of the option is the course object id
+		onmouseover - call updateTooltip(id) with the course object id
+		onclick 	- call classUntaken(id, type) with the course object id and
+					  type
+		*/
 		taken_select_content += "<option value=\"";
 		taken_select_content += courses_taken[type][i].id;
 		taken_select_content += "\" onmouseover=\"updateTooltip('";
@@ -278,15 +347,18 @@ function updateSelections(type) {
 		taken_select_content += courses_taken[type][i].id;
 		taken_select_content += "', '";
 		taken_select_content += type;
-		taken_select_content += "')\" class=\"";
-		taken_select_content += type;
-		taken_select_content += "\">";
+		taken_select_content += "')\">";
 		taken_select_content += courses_taken[type][i].name;
 		taken_select_content += "</option>";
 	}
 
-	//update options courses
+	//iterate over the course options of the provided type
 	for (var i = 0; i < courses_options[type].length; i++) {
+		/*
+		generate a select option for each course object; attributes:
+		value 		- value of the option is the course object id
+		onmouseover - call updateTooltip(id) with the course object id
+		*/
 		options_select_content += "<option value=\"";
 		options_select_content += courses_options[type][i].id;
 		options_select_content += "\" onmouseover=\"updateTooltip('"
@@ -296,66 +368,113 @@ function updateSelections(type) {
 		options_select_content += "</option>";
 	}
 
-	//set the contents
+	//write the contents to the innerHTMLs of the select elements
 	available_select.innerHTML = available_select_content;
 	taken_select.innerHTML = taken_select_content;
 	options_select.innerHTML = options_select_content;
 }
 
-/* removes class and prereqs recursively from avaiable and adds them to taken */
+/*
+classTaken(id, type, depth)
+id 	  - course id corresponding to a course object in the courses array
+type  - type of course (cmsc, math, sci)
+depth - reccursion depth (defaults to 0)
+Removes the course object from the available courses array of the provided type
+matching the course id and inserts it into the taken courses of the provided
+type; Recursively calls the function on all prerequisite courses of the course
+object; The initial call makes calls to:
+updateAllOptions()    - update the options based on taken courses
+updateAllSelections() - update the select elements
+*/
 function classTaken(id, type, depth = 0) {
+	//get the course object based on id
 	var course = findCourse(id);
+	/*
+	get the index of the course object in the available courses array of the
+	provided type
+	*/
 	var idx = findCourseIndex(id, courses_available[type]);
 
-	// already taken, quit
+	/*
+	return if the course object is not in the available courses array of the
+	provided type
+	*/
 	if (idx == -1) {
 		return;
 	}
 
-	//remove it
+	/*
+	remove the course object from the available courses array of the provided
+	type
+	*/
 	courses_available[type].splice(idx, 1);
-	//add it
+	//insert the course object into the taken courses array of the provided type
 	insertCourse(course, courses_taken[type]);
 
-	//do the prereqs
+	//iterate over the prerequisite courses of the course object
 	var prereqs = course.prereqs;
 	for (var i = 0; i < prereqs.length; i++) {
+		//get the course based on the prerequisite id
 		var prereq = findCourse(prereqs[i].id);
+		//recursive call to process the course as taken
 		classTaken(prereq.id, prereq.type, depth - 1)
 	}
 
-	//only performed by the intial call
+	//performed by the intial call to update the options and select elements
 	if (depth == 0) {
-		//get the available options
 		updateAllOptions();
-
-		//update the html
 		updateAllSelections();		
 	}
 }
 
-/* removes class and classes it was prereq for recursively from taken and adds them to available */
+/*
+classUntaken(id, type, depth)
+id 	  - course id corresponding to a course object in the courses array
+type  - type of course (cmsc, math, sci)
+depth - reccursion depth (defaults to 0)
+Removes the course object from the taken courses array of the provided type
+matching the course id and inserts it into the available courses of the provided
+type; Recursively calls the function on courses taken that have a prerequisite
+course matching the affected course; The initial call makes calls to:
+updateAllOptions()    - update the options based on taken courses
+updateAllSelections() - update the select elements
+*/
 function classUntaken(id, type, depth = 0) {
+	//get the course object based on id
 	var course = findCourse(id);
+	/*
+	get the index of the course object in the taken courses array of the
+	provided type
+	*/
 	var idx = findCourseIndex(id, courses_taken[type]);
 
-	//already untaken, quit
+	/*
+	return if the course object is not in the taken courses array of the
+	provided type
+	*/
 	if (idx == -1) {
 		return;
 	}
 
-	//remove it
+	//remove the course object from the taken courses array of the provided type
 	courses_taken[type].splice(idx, 1);
-	//add it
+	/*
+	insert the course object into the available courses array of the provided
+	type
+	*/
 	insertCourse(course, courses_available[type]);
 
-	//search for classes it was a prereq for and untake them for each type
+	/*
+	iterate over the taken courses array of each course type and make a
+	recursive call on that course if one of its prerequisite courses was the one
+	affected
+	*/
 	for (var i = 0; i < courses_taken["cmsc"].length; i++) {
 		var prereqs = courses_taken["cmsc"][i].prereqs;
 		for (var j = 0; j < prereqs.length; j++) {
-			console.log(prereqs[j].id);
 			if (prereqs[j].id == id) {
-				classUntaken(courses_taken["cmsc"][i].id, courses_taken["cmsc"][i].type, depth - 1);
+				classUntaken(courses_taken["cmsc"][i].id,
+								courses_taken["cmsc"][i].type, depth - 1);
 			}
 		}
 	}
@@ -363,7 +482,8 @@ function classUntaken(id, type, depth = 0) {
 		var prereqs = courses_taken["math"][i].prereqs;
 		for (var j = 0; j < prereqs.length; j++) {
 			if (prereqs[j].id == id) {
-				classUntaken(courses_taken["math"][i].id, courses_taken["math"][i].type, depth - 1);
+				classUntaken(courses_taken["math"][i].id,
+								courses_taken["math"][i].type, depth - 1);
 			}
 		}
 	}
@@ -371,27 +491,26 @@ function classUntaken(id, type, depth = 0) {
 		var prereqs = courses_taken["sci"][i].prereqs;
 		for (var j = 0; j < prereqs.length; j++) {
 			if (prereqs[j].id == id) {
-				classUntaken(courses_taken["sci"][i].id, courses_taken["sci"][i].type, depth - 1);
+				classUntaken(courses_taken["sci"][i].id,
+								courses_taken["sci"][i].type, depth - 1);
 			}
 		}
 	}
 
-	//only performed by the intial call
+	//performed by the intial call to update the options and select elements
 	if (depth == 0) {
-		//get the available options
 		updateAllOptions();
-
-		//update the html
 		updateAllSelections();		
 	}
 }
 
 /*
-returns an array of string representations of all of the courses for debug
+getCourseDebug()
+Returns a string representation of the course objects from the courses array
 */
 function getCoursesDebug() {
 	var course_list = [];
-	//iterate over all of the courses in the courses array
+	//iterate over the courses array
 	for (var i = 0; i < courses.length; i++) {
 		//skip the dummy course
 		if (courses[i].id == "000004") {
@@ -406,7 +525,7 @@ function getCoursesDebug() {
 		course += "<b>Course Name:</b> " + courses[i].name + "<br />";
 		course += "<b>Course Description:</b><br />" + courses[i].desc + "<br />";
 
-		//add all of the names of its prerequisites
+		//add its prerequisites
 		course += "<b>Prerequisites:</b><br />";
 		var prereqs = courses[i].prereqs;
 		//no prerequisites
@@ -420,7 +539,7 @@ function getCoursesDebug() {
 				course += "&nbsp;&nbsp;&nbsp;&nbsp;" + prereq.name + "<br />";
 			}			
 		}
-		//add it to the array
+		//push it to the array
 		course_list.push(course);
 	}
 
