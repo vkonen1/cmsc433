@@ -20,12 +20,6 @@ courses_options["cmsc"] = [];
 courses_options["math"] = [];
 courses_options["sci"] = [];
 
-//arrays to keep track of class objects for manipulation
-var courses_available_objs = [];
-courses_available_objs["cmsc"] = [];
-courses_available_objs["math"] = [];
-courses_available_objs["sci"] = [];
-
 //this function is run after everything loads
 function init() {
 	//parse the json that was passed by php (courses_json)
@@ -37,7 +31,7 @@ function init() {
 		courses[i].order = i;
 	}
 
-	/* DEBUG 
+	/* DEBUG */
 	//get the div with id main for debug writing
 	var main = document.getElementById("main");	
 	//generate the complete list of string representations of the course
@@ -45,17 +39,16 @@ function init() {
 	for (var i = 0; i < course_list.length; i++) {
 		main.innerHTML += "<p>" + course_list[i] + "</p>\n";
 	}
-	 END DEBUG */
+	/* END DEBUG */
 
 	//setup the arrays for the classes
-	courses_available["cmsc"] = getCourses("cmsc");
-	courses_available["math"] = getCourses("math");
-	courses_available["sci"] = getCourses("sci");
+	updateAllCourses();
+
+	//get the available options
+	updateAllOptions();
 
 	//update the html select boxes
-	courses_available_objs["cmsc"] = updateSelections("cmsc");
-	courses_available_objs["maths"] = updateSelections("math");
-	courses_available_objs["sci"] = updateSelections("sci");
+	updateAllSelections();
 }
 
 /*
@@ -69,24 +62,6 @@ function changeTab(type) {
 	}
 	
 	document.getElementById(type + "-tab").style.display = "inline";
-}
-
-/*
-returns an array of all courses with course_type matching type
-*/
-function getCourses(type) {
-	var course_list = []
-	//iterate over all of the courses in the courses array
-	for (var i = 0; i < courses.length; i++) {
-		//skip the dummy course (prereq for cmsc447)
-		if (courses[i].id == "000004") {
-			continue;
-		}
-		if (courses[i].type == type) {
-			course_list.push(courses[i]);
-		}
-	}
-	return course_list;
 }
 
 /*
@@ -117,6 +92,89 @@ function findCourseIndex(id, course_list) {
 	}
 	//not in array
 	return -1;
+}
+
+/* inserts course into course_list based on the order attribute */
+function insertClass(course, course_list) {
+	//insert into the array in the correct order if possible
+	for (var i = 0; i < course_list.length; i++) {
+		if (course.order < course_list[i].order) {
+			course_list.splice(i, 0, course);
+			return;
+		}
+	}
+
+	//push to the end of the array if it was not inserted
+	course_list.push(course);
+}
+
+/*
+loads course arrays
+*/
+function updateAllCourses() {
+	updateCourses("cmsc");
+	updateCourses("math");
+	updateCourses("sci");
+}
+
+/*
+loads available course of type into appropriate array
+*/
+function updateCourses(type) {
+	courses_available[type] = [];
+	//iterate over all of the courses in the courses array
+	for (var i = 0; i < courses.length; i++) {
+		//skip the dummy course (prereq for cmsc447)
+		if (courses[i].id == "000004") {
+			continue;
+		}
+		if (courses[i].type == type) {
+			courses_available[type].push(courses[i]);
+		}
+	}
+}
+
+/*
+updates all the options
+*/
+function updateAllOptions() {
+	updateOptions("cmsc");
+	updateOptions("math");
+	updateOptions("sci");
+}
+
+/*
+updates the array of options based on the classes that have been taken
+*/
+function updateOptions(type) {
+	courses_options[type] = [];
+	//loop over the available classes
+	for (var i = 0; i < courses_available[type].length; i++) {
+		var option = true;
+		//loops over the prereqs
+		var prereqs = courses_available[type][i].prereqs;
+		for (var j = 0; j < prereqs.length; j++) {
+			//if it hasn't been taken, the class is not an option
+			if (findCourseIndex(prereqs[j].id, courses_taken["cmsc"]) == -1 &&
+				findCourseIndex(prereqs[j].id, courses_taken["math"]) == -1 &&
+				findCourseIndex(prereqs[j].id, courses_taken["sci"]) == -1) {
+				option = false;
+				break;
+			}
+		}
+		if (option) {
+			courses_options[type].push(courses_available[type][i]);
+		}
+	}
+}
+
+/*
+updates the html for all select boxes
+*/
+function updateAllSelections() {
+	updateSelections("cmsc");
+	updateSelections("math");
+	updateSelections("sci");
 }
 
 /*
@@ -168,41 +226,37 @@ function updateSelections(type) {
 	available_select.innerHTML = available_select_content;
 	taken_select.innerHTML = taken_select_content;
 	options_select.innerHTML = options_select_content;
-
-	//return the objects generated
-	return document.getElementsByClassName(type);
 }
 
-function classTaken(id, type) {
+/* removes class and prereqs recursively from avaiable and adds them to taken */
+function classTaken(id, type, depth = 0) {
 	var course = findCourse(id);
 	var idx = findCourseIndex(id, courses_available[type]);
 
+	/* already taken, quit */
 	if (idx == -1) {
 		return;
 	}
 
+	/* remove it */
 	courses_available[type].splice(idx, 1);
+	/* add it */
 	insertClass(course, courses_taken[type]);
 
+	/* do the prereqs */
 	var prereqs = course.prereqs;
 	for (var i = 0; i < prereqs.length; i++) {
 		var prereq = findCourse(prereqs[i].id);
-		classTaken(prereq.id, prereq.type)
+		classTaken(prereq.id, prereq.type, depth - 1)
 	}
 
-	updateSelections(type);
-}
+	if (depth == 0) {
+		//get the available options
+		updateAllOptions();
 
-function insertClass(course, course_list) {
-	for (var i = 0; i < course_list.length; i++) {
-		if (course.order < course_list[i].order) {
-			course_list.splice(i, 0, course);
-			return;
-		}
+		/* update the html */
+		updateAllSelections();		
 	}
-
-	//push to the end of the array if it was not inserted
-	course_list.push(course);
 }
 
 /*
