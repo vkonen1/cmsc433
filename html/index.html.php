@@ -18,9 +18,9 @@
 				<input type="submit" value="Submit">
 				<br> <br> <br>
 			</form>
-			<button type="button" id="computer-button" class="tab-button" onclick="changeTab('cmsc')">Computer</button>
-			<button type="button" id="math-button" class="tab-button" onclick="changeTab('math')">Math</button>
-			<button type="button" id="science-button" class="tab-button" onclick="changeTab('sci')">Science</button>
+			<button class="tab-button" onclick="changeTab('cmsc')">Computer</button>
+			<button class="tab-button" onclick="changeTab('math')">Math</button>
+			<button class="tab-button" onclick="changeTab('sci')">Science</button>
 		</div>
 
 		<div id="northEast">
@@ -33,60 +33,61 @@
 
 		<!-- Select Boxes -->
 		<!-- Computer Science -->
-		<div id="cmsc">
+		<div id="cmsc-tab" class="tab">
 			<div class="course-section">
-				<select id="cmsc-course-available" size="18"></select>
+				<select id="cmsc-available" size="18"></select>
 				<p>Class Available</p>
 			</div>
 
 			<div class="course-section">
-				<select id="cmsc-course-taken" size="18"></select>
+				<select id="cmsc-taken" size="18"></select>
 				<p>Classes Taken</p>
 			</div>
 
 			<div class="course-section">
-				<select id="cmsc-course-options" size="18"></select>
+				<select id="cmsc-options" size="18"></select>
 				<p>Class Options</p>
 			</div>
 		</div>
 		<!-- Math -->
-		<div id="math" style="display: none;">
+		<div id="math-tab" class="tab" style="display: none;">
 			<div class="course-section">
-				<select id="math-course-available" size="18"></select>
+				<select id="math-available" size="18"></select>
 				<p>Class Available</p>
 			</div>
 
 			<div class="course-section">
-				<select id="math-course-taken" size="18"></select>
+				<select id="math-taken" size="18"></select>
 				<p>Classes Taken</p>
 			</div>
 
 			<div class="course-section">
-				<select id="math-course-options" size="18"></select>
+				<select id="math-options" size="18"></select>
 				<p>Class Options</p>
 			</div>
 		</div>
 		<!-- Science -->
-		<div id="sci" style="display: none;">
+		<div id="sci-tab" class="tab" style="display: none;">
 			<div class="course-section">
-				<select id="sci-course-available" size="18"></select>
+				<select id="sci-available" size="18"></select>
 				<p>Class Available</p>
 			</div>
 
 			<div class="course-section">
-				<select id="sci-course-taken" size="18"></select>
+				<select id="sci-taken" size="18"></select>
 				<p>Classes Taken</p>
 			</div>
 
 			<div class="course-section">
-				<select id="sci-course-options" size="18"></select>
+				<select id="sci-options" size="18"></select>
 				<p>Class Options</p>
 			</div>
 		</div>
 		<!-- End of Select Boxes -->
 
-		<!-- For debugging class population -->
+		<!-- DEBUG -->
 		<div class="clear"></div>
 		<div id="main"></div>
+		<!-- END DEBUG -->
 	</body>
 </html>
