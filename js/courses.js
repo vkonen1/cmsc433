@@ -177,9 +177,7 @@ function updateAllSelections() {
 	updateSelections("sci");
 }
 
-/*
-updates the html of the select boxes for type with data from the passed in arrays
-*/
+/* updates the html of the select boxes for type with data from the passed in arrays */
 function updateSelections(type) {
 	var available_select = document.getElementById(type + "-available");
 	var taken_select = document.getElementById(type + "-taken");
@@ -208,6 +206,12 @@ function updateSelections(type) {
 	for (var i = 0; i < courses_taken[type].length; i++) {
 		taken_select_content += "<option value=\"";
 		taken_select_content += courses_taken[type][i].id;
+		taken_select_content += "\" onclick=\"classUntaken('";
+		taken_select_content += courses_taken[type][i].id;
+		taken_select_content += "', '";
+		taken_select_content += type;
+		taken_select_content += "')\" class=\"";
+		taken_select_content += type;
 		taken_select_content += "\">";
 		taken_select_content += courses_taken[type][i].name;
 		taken_select_content += "</option>";
@@ -233,28 +237,81 @@ function classTaken(id, type, depth = 0) {
 	var course = findCourse(id);
 	var idx = findCourseIndex(id, courses_available[type]);
 
-	/* already taken, quit */
+	// already taken, quit
 	if (idx == -1) {
 		return;
 	}
 
-	/* remove it */
+	//remove it
 	courses_available[type].splice(idx, 1);
-	/* add it */
+	//add it
 	insertClass(course, courses_taken[type]);
 
-	/* do the prereqs */
+	//do the prereqs
 	var prereqs = course.prereqs;
 	for (var i = 0; i < prereqs.length; i++) {
 		var prereq = findCourse(prereqs[i].id);
 		classTaken(prereq.id, prereq.type, depth - 1)
 	}
 
+	//only performed by the intial call
 	if (depth == 0) {
 		//get the available options
 		updateAllOptions();
 
-		/* update the html */
+		//update the html
+		updateAllSelections();		
+	}
+}
+
+/* removes class and classes it was prereq for recursively from taken and adds them to available */
+function classUntaken(id, type, depth = 0) {
+	var course = findCourse(id);
+	var idx = findCourseIndex(id, courses_taken[type]);
+
+	//already untaken, quit
+	if (idx == -1) {
+		return;
+	}
+
+	//remove it
+	courses_taken[type].splice(idx, 1);
+	//add it
+	insertClass(course, courses_available[type]);
+
+	//search for classes it was a prereq for and untake them for each type
+	for (var i = 0; i < courses_taken["cmsc"].length; i++) {
+		var prereqs = courses_taken["cmsc"][i].prereqs;
+		for (var j = 0; j < prereqs.length; j++) {
+			console.log(prereqs[j].id);
+			if (prereqs[j].id == id) {
+				classUntaken(courses_taken["cmsc"][i].id, courses_taken["cmsc"][i].type, depth - 1);
+			}
+		}
+	}
+	for (var i = 0; i < courses_taken["math"].length; i++) {
+		var prereqs = courses_taken["math"][i].prereqs;
+		for (var j = 0; j < prereqs.length; j++) {
+			if (prereqs[j].id == id) {
+				classUntaken(courses_taken["math"][i].id, courses_taken["math"][i].type, depth - 1);
+			}
+		}
+	}
+	for (var i = 0; i < courses_taken["sci"].length; i++) {
+		var prereqs = courses_taken["sci"][i].prereqs;
+		for (var j = 0; j < prereqs.length; j++) {
+			if (prereqs[j].id == id) {
+				classUntaken(courses_taken["sci"][i].id, courses_taken["sci"][i].type, depth - 1);
+			}
+		}
+	}
+
+	//only performed by the intial call
+	if (depth == 0) {
+		//get the available options
+		updateAllOptions();
+
+		//update the html
 		updateAllSelections();		
 	}
 }
