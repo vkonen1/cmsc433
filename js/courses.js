@@ -8,6 +8,7 @@ Courses Options - Courses that can be taken, based on courses taken
 Functions:
 init()
 changeTab(type)
+toggleGlobalWarning(status, message)
 updateTooltip(id)
 findCourse(id)
 findCourseIndex(id, course_list)
@@ -100,6 +101,26 @@ function changeTab(type) {
 	
 	//display the active tab based on type
 	document.getElementById(type + "-tab").style.display = "inline";
+}
+
+/*
+toggleGlobalWarning(status, message)
+status  - true or false to show or hide the element with is "global-warning"
+message - the message to put into the element with id "global-warning"
+Toggles the display of the element with id "global-warning" and sets the
+contents to message if status is true
+*/
+function toggleGlobalWarning(status, message = "") {
+	//get the element with id "global-warning"
+	var global_warning = document.getElementById("global-warning");
+
+	//if status is true, set its contents to message and display, otherwise hide
+	if (status) {
+		global_warning.innerHTML = message;
+		global_warning.style.display = "inline";
+	} else {
+		global_warning.style.display = "none";
+	}
 }
 
 /*
@@ -404,6 +425,29 @@ function classTaken(id, type, depth = 0) {
 	}
 
 	/*
+	special case for CMSC 447 and CMSC 448 (requires one 400-Level CMSC course
+	taken)
+	*/
+	if (type == "cmsc" && (id == "101927" || id == "052944")) {
+		//check cmsc courses taken array for a senior level course object
+		var senior_requirement = false;
+		for (var i = 0; i < courses_taken["cmsc"].length; i++) {
+			if (courses_taken["cmsc"][i].senior == "1") {
+				senior_requirement = true;
+				break;
+			}
+		}
+
+		//display error and return if requirement not met
+		if (!senior_requirement) {
+			var message = "One 400-Level Computer Science course must be taken";
+			message += " to take CMSC 447 - Software Engineering I";
+			toggleGlobalWarning(true, message);
+			return;
+		}
+	}
+
+	/*
 	remove the course object from the available courses array of the provided
 	type
 	*/
@@ -454,6 +498,39 @@ function classUntaken(id, type, depth = 0) {
 	*/
 	if (idx == -1) {
 		return;
+	}
+
+	/*
+	special case for untaking 400-Level CMSC courses (ensure there is one or
+	more remaining if CMSC447 is in the courses taken array)
+	*/
+	if (type == "cmsc" && course.id != "101927" && course.senior == "1") {
+		var cmsc447 = false;
+		var cmsc448 = false;
+		var senior_count = 0;
+
+		//iterate over cmsc courses taken array
+		for (var i = 0; i < courses_taken["cmsc"].length; i++) {
+			/*
+			check if cmsc447 or cmsc448 is taken and count the number of other
+			400-Level CMSC courses
+			*/
+			if (courses_taken["cmsc"][i].id == "101927") {
+				cmsc447 = true;
+			} else if (courses_taken["cmsc"][i].id == "052944") {
+				cmsc448 = true;
+			} else if (courses_taken["cmsc"][i].senior == "1") {
+				senior_count++;
+			}
+		}
+
+		/*
+		untake cmsc447 if there is only one 400-Level CMSC course and it is
+		being untaken
+		*/
+		if (cmsc447 && senior_count == 1) {
+			classUntaken("101927", "cmsc", depth - 1);
+		}
 	}
 
 	//remove the course object from the taken courses array of the provided type

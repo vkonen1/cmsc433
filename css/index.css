@@ -1,7 +1,18 @@
-#northWest {
+#global-warning {
+	position: absolute;
+	left: 35%;
+	top: 25px;
+	height: 50px;
+	width: 30%;
+
+	background-color: black;
+	color: red;
+}
+
+#north-west {
 	float: left;
 }
-#northEast {
+#north-east {
 	float: left;
 	margin-left: 50px;
 }

@@ -11,7 +11,9 @@
 	<body>
 		<h1>CMSC Degree Tracker</h1>
 
-		<div id="northWest">
+		<div id="global-warning" style="display: none" onmouseover="toggleGlobalWarning(false)"></div>
+
+		<div id="north-west">
 			<form>
 				ID #:
 				<input type="text" name="idnum">
@@ -23,7 +25,7 @@
 			<button class="tab-button" onclick="changeTab('sci')">Science</button>
 		</div>
 
-		<div id="northEast">
+		<div id="north-east">
 			<textarea id="tooltip" disabled></textarea>
 		</div>
 
