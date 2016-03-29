@@ -84,6 +84,8 @@ function init() {
 
 	//update the html for all course types
 	updateAllSelections();
+
+	initTabContent();
 }
 
 /*
@@ -411,6 +413,8 @@ function updateSelections(type) {
 	available_select.innerHTML = available_select_content;
 	taken_select.innerHTML = taken_select_content;
 	options_select.innerHTML = options_select_content;
+
+	adjustScrollContent(type);
 }
 
 /*

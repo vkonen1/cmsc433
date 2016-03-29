@@ -1,5 +1,5 @@
 html {
-	background-color: #778899;
+	background-color: #535f6b;
 }
 body {
 	background-color: white;
@@ -9,6 +9,8 @@ body {
 
 h1 {
 	margin-top: 0;
+	color: #2f363d;
+	text-align: center;
 }
 
 #global-warning {
@@ -18,7 +20,7 @@ h1 {
 	height: 50px;
 	width: 30%;
 
-	background-color: #778899;
+	background-color: white;
 	color: red;
 }
 
@@ -65,13 +67,16 @@ h1 {
 	border-right: none;
 }
 
+.course-select {
+	position: relative;
+}
+
 .course-item {
 	height: 55px;
 	margin: 0 0 15px 0;
 	padding: 5px;
 
-	background-color: #778899;
-	color: #2f363d;
+	background-color: #9fabb7;
 
 	text-align: center;
 	font-size: 14px;
@@ -82,8 +87,12 @@ h1 {
 .course-item:last-child {
 	margin: 0;
 }
+.course-item:hover {
+	cursor: pointer;
+}
 .course-item > p {
 	display: table-cell;
+	color: #2f363d;
 	height: 55px;
 	width: 268px;
 	text-align: center;
