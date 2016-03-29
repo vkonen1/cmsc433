@@ -31,59 +31,52 @@
 
 		<div class="clear"></div>
 
-		<!-- Select Boxes -->
-		<!-- Computer Science -->
-		<div id="cmsc-tab" class="tab">
-			<div class="course-section">
-				<select id="cmsc-available" size="18"></select>
-				<p>Class Available</p>
-			</div>
+		<!-- Tab Content -->
+		<div id="tab-content">
+			<!-- Computer Science -->
+			<div id="cmsc-tab" class="tab">
+				<div class="course-section">
+					<div id="cmsc-available" class="course-select"></div>
+				</div>
 
-			<div class="course-section">
-				<select id="cmsc-taken" size="18"></select>
-				<p>Classes Taken</p>
-			</div>
+				<div class="course-section">
+					<div id="cmsc-taken" class="course-select"></div>
+				</div>
 
-			<div class="course-section">
-				<select id="cmsc-options" size="18"></select>
-				<p>Class Options</p>
+				<div class="course-section">
+					<div id="cmsc-options" class="course-select"></div>
+				</div>
+			</div>
+			<!-- Math -->
+			<div id="math-tab" class="tab" style="display: none;">
+				<div class="course-section">
+					<div id="math-available" class="course-select"></div>
+				</div>
+
+				<div class="course-section">
+					<div id="math-taken" class="course-select"></div>
+				</div>
+
+				<div class="course-section">
+					<div id="math-options" class="course-select"></div>
+				</div>
+			</div>
+			<!-- Science -->
+			<div id="sci-tab" class="tab" style="display: none;">
+				<div class="course-section">
+					<div id="sci-available" class="course-select"></div>
+				</div>
+
+				<div class="course-section">
+					<div id="sci-taken" class="course-select"></div>
+				</div>
+
+				<div class="course-section">
+					<div id="sci-options" class="course-select"></div>
+				</div>
 			</div>
 		</div>
-		<!-- Math -->
-		<div id="math-tab" class="tab" style="display: none;">
-			<div class="course-section">
-				<select id="math-available" size="18"></select>
-				<p>Class Available</p>
-			</div>
-
-			<div class="course-section">
-				<select id="math-taken" size="18"></select>
-				<p>Classes Taken</p>
-			</div>
-
-			<div class="course-section">
-				<select id="math-options" size="18"></select>
-				<p>Class Options</p>
-			</div>
-		</div>
-		<!-- Science -->
-		<div id="sci-tab" class="tab" style="display: none;">
-			<div class="course-section">
-				<select id="sci-available" size="18"></select>
-				<p>Class Available</p>
-			</div>
-
-			<div class="course-section">
-				<select id="sci-taken" size="18"></select>
-				<p>Classes Taken</p>
-			</div>
-
-			<div class="course-section">
-				<select id="sci-options" size="18"></select>
-				<p>Class Options</p>
-			</div>
-		</div>
-		<!-- End of Select Boxes -->
+		<!-- End of Tab Content -->
 
 		<!-- DEBUG -->
 		<div class="clear"></div>
