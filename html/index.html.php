@@ -12,7 +12,7 @@
 	<body>
 		<h1>Computer Science Degree Tracker</h1>
 
-		<div id="global-warning" style="display: none" onmouseover="toggleGlobalWarning(false)"></div>
+		<div id="global-warning" style="display: none;" onmouseover="toggleGlobalWarning(false)"></div>
 
 		<div id="north-west">
 			<form>

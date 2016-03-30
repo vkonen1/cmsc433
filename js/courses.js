@@ -8,7 +8,7 @@ Courses Options - Courses that can be taken, based on courses taken
 Functions:
 init()
 changeTab(type)
-toggleGlobalWarning(status, message)
+toggleGlobalWarning(message, timeout)
 updateTooltip(id)
 findCourse(id)
 findCourseIndex(id, course_list)
@@ -43,6 +43,9 @@ var courses_options = [];
 courses_options["cmsc"] = [];
 courses_options["math"] = [];
 courses_options["sci"] = [];
+
+//timeout for the global warning
+var global_warning_timeout;
 
 /*
 init()
@@ -105,20 +108,28 @@ function changeTab(type) {
 }
 
 /*
-toggleGlobalWarning(status, message)
-status  - true or false to show or hide the element with is "global-warning"
+toggleGlobalWarning(status, message, timeout)
+status  - indicates whether to show or hide the warning
 message - the message to put into the element with id "global-warning"
+timeout - time to wait until the message is hidden again (default 5 seconds)
 Toggles the display of the element with id "global-warning" and sets the
-contents to message if status is true
+contents to message, sets a timeout to hide the message
 */
-function toggleGlobalWarning(status, message = "") {
+function toggleGlobalWarning(status, message = "", timeout = 5000) {
 	//get the element with id "global-warning"
 	var global_warning = document.getElementById("global-warning");
 
-	//if status is true, set its contents to message and display, otherwise hide
+	//clear the global warning timeout
+	clearTimeout(global_warning_timeout);
+
+	//show the warning if status is true and set the timeout to hide it
 	if (status) {
-		global_warning.innerHTML = message;
+		global_warning.innerHTML = "<p>" + message + "</p>";
 		global_warning.style.display = "inline";
+		global_warning_timeout = setTimeout(function() {
+			global_warning.style.display = "none";
+		}, timeout);
+	//hide the warning	
 	} else {
 		global_warning.style.display = "none";
 	}
