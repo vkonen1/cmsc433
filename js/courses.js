@@ -339,7 +339,7 @@ based on the course container arrays of the provided type (available, taken,
 options)
 */
 function updateSelections(type) {
-	//get the select elements associated with the provided type
+	//get the elements associated with the provided type
 	var available_select = document.getElementById(type + "-available");
 	var taken_select = document.getElementById(type + "-taken");
 	var options_select = document.getElementById(type + "-options");
@@ -352,8 +352,9 @@ function updateSelections(type) {
 	//iterate over the available courses of the provided type
 	for (var i = 0; i < courses_available[type].length; i++) {
 		/*
-		generate a select option for each course object; attributes:
-		value 		- value of the option is the course object id
+		generate an element for each course object; attributes:
+		class 		- every element is a course-item
+		value 		- value of the element is the course object id
 		onmouseover - call updateTooltip(id) with the course object id
 		onclick 	- call classTaken(id, type) with the course object id and
 					  type
@@ -374,8 +375,9 @@ function updateSelections(type) {
 	//iterate over the taken courses of the provided type
 	for (var i = 0; i < courses_taken[type].length; i++) {
 		/*
-		generate a select option for each course object; attributes:
-		value 		- value of the option is the course object id
+		generate an element for each course object; attributes:
+		class 		- every element is a course-item
+		value 		- value of the element is the course object id
 		onmouseover - call updateTooltip(id) with the course object id
 		onclick 	- call classUntaken(id, type) with the course object id and
 					  type
@@ -396,8 +398,9 @@ function updateSelections(type) {
 	//iterate over the course options of the provided type
 	for (var i = 0; i < courses_options[type].length; i++) {
 		/*
-		generate a select option for each course object; attributes:
-		value 		- value of the option is the course object id
+		generate an element for each course object; attributes:
+		class 		- every element is a course-item
+		value 		- value of the element is the course object id
 		onmouseover - call updateTooltip(id) with the course object id
 		*/
 		options_select_content += "<div class='course-item' value=\"";
@@ -414,6 +417,7 @@ function updateSelections(type) {
 	taken_select.innerHTML = taken_select_content;
 	options_select.innerHTML = options_select_content;
 
+	//call from tab-content.js to fix positioning of tab selection areas
 	adjustScrollContent(type);
 }
 

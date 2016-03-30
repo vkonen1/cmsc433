@@ -16,11 +16,12 @@
 
 		<div id="north-west">
 			<form>
-				ID #:
-				<input type="text" name="idnum">
+				<label for="student_id">ID #:</label>
+				<input type="text" name="student_id">
+				<div id="hidden"></div>
 				<input type="submit" value="Submit">
-				<br> <br> <br>
 			</form>
+			<br /><br /><br />
 			<button class="tab-button" onclick="changeTab('cmsc')">Computer</button>
 			<button class="tab-button" onclick="changeTab('math')">Math</button>
 			<button class="tab-button" onclick="changeTab('sci')">Science</button>
