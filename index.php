@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 //grab the help information for the tooltip for javascript
-$help_info = file_get_contents("data/help_info.txt");
+$help_info = str_replace("\n", "<br />", file_get_contents("data/help_info.txt"));
 
 //update the json file using the mysql server database
 require("json_update.php");

@@ -6,7 +6,7 @@ scrollTabContent(event, id)
 */
 
 //top offset from the top of the page
-var start_top;
+var tab_start_top;
 
 //height in pixels of the selection areas
 var selection_area_height = 400;
@@ -14,15 +14,15 @@ var selection_area_height = 400;
 var selection_area_padding = 15;
 
 //number of pixels to scroll per scroll event
-var scroll_rate = 20;
+var tab_scroll_rate = 20;
 
 /*
 initTabContent()
-initializes start_top and adds event listeners for the selection area elements
+initializes tab_start_top and adds event listeners for the selection area elements
 */
 function initTabContent() {
 	//initialize the top offset
-	start_top = document.getElementById("cmsc-available").offsetTop;
+	tab_start_top = document.getElementById("cmsc-available").offsetTop;
 
 	/*
 	add an event listener to each tab selection area that calls
@@ -115,7 +115,7 @@ function adjustScrollContent(type) {
 		//only compute if height is a number and more than the selection area
 		if (!isNaN(height) && height >= selection_area_height) {
 			//compute the relative top offset based on that value and the start
-			top = selections[i].offsetTop - start_top;
+			top = selections[i].offsetTop - tab_start_top;
 
 			//reduce the top based on the height
 			if (top < (height * (-1)) + selection_area_height) {
@@ -143,8 +143,9 @@ function scrollTabContent(event, id) {
 	//get the current offset height of the object
 	var height = selection.offsetHeight;
 	//compute the relative top offset based on that value and the start one
-	var top = selection.offsetTop - start_top;
+	var top = selection.offsetTop - tab_start_top;
 
+	//normalize the scroll delta
 	var normal_delta = event.deltaY / event.deltaY;
 	if (event.deltaY < 0) {
 		normal_delta *= (-1);
@@ -154,7 +155,7 @@ function scrollTabContent(event, id) {
 	var reverse_delta = normal_delta * (-1);
 
 	//compute the distance in pixels to scroll
-	var scroll_dist = reverse_delta * scroll_rate;
+	var scroll_dist = reverse_delta * tab_scroll_rate;
 
 	//compute the new top value
 	var scroll = top + scroll_dist;
