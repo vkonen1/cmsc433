@@ -7,26 +7,31 @@
 		<script type="text/javascript">var courses_json = <?php echo($courses_json); ?>;</script>
 		<script type="text/javascript" src="js/courses.js"></script>
 		<script type="text/javascript" src="js/tab-content.js"></script>
+		<script type="text/javascript" src="js/form.js"></script>
 	</head>
 
 	<body>
 		<h1>Computer Science Degree Tracker</h1>
 		<div id="global-warning" style="display: none;" onmouseover="toggleGlobalWarning(false)"></div>
 		<div id="top-section">
-			<div id="form">
-				<form>
+			<div id="form-div">
+				<form id="form" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 					<div class="form-section">
-						<label for="first_name">First Name:</label><br />
-						<input type="text" name="first_name"><br />
-						<label for="last_name">Last Name:</label><br />
-						<input type="text" name="last_name"><br />
+						<label for="first_name">First Name </label>
+						<span class="form-error"><?php echo $first_nameErr; ?></span><br />
+						<input type="text" name="first_name" value="<?php echo $first_name; ?>"><br />
+						<label for="last_name">Last Name </label>
+						<span class="form-error"><?php echo $last_nameErr; ?></span><br />
+						<input type="text" name="last_name" value="<?php echo $last_name; ?>"><br />
 					</div>
 
 					<div class="form-section">
-						<label for="email">Email:</label><br />
-						<input type="text" name="email"><br />
-						<label for="id">Student ID:</label><br />
-						<input type="text" name="id">
+						<label for="email">Email </label>
+						<span class="form-error"><?php echo $emailErr; ?></span><br />
+						<input type="text" name="email" value="<?php echo $email; ?>"><br />
+						<label for="id">Student ID </label>
+						<span class="form-error"><?php echo $idErr; ?></span><br />
+						<input type="text" name="id" value="<?php echo $id; ?>">
 					</div>
 
 					<div id="hidden"></div>

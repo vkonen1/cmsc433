@@ -7,6 +7,7 @@ Light Blue Gray: #9FABB7
 Blue Gray: #535F6B
 Dark Blue Gray: #2F363D
 
+Red: #FF0000
 Dark Red: #580000
 */
 
@@ -77,7 +78,7 @@ label{
 	height: 140px;
 }
 
-#form {
+#form-div {
 	width: 365px;
 	margin: 0 15px;
 	float: left;
@@ -94,6 +95,7 @@ label{
 
 label {
 	font-size: 16px;
+	font-weight: bold;
 	color: #2F363D;
 }
 
@@ -107,6 +109,12 @@ input[type="text"] {
 	padding: 0 7px;
 	border-style:solid;
 }
+.form-error {
+	font-size: 16px;
+	font-weight: bold;
+	color: #FF0000;
+}
+
 #form-submit {
 	background: #669900;
 	border-radius:15px;
