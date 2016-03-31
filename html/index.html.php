@@ -4,7 +4,9 @@
 		<title>Computer Science Degree Tracker</title>
 		<link rel="stylesheet" href="css/index.css">
 		<!-- get the encoded json from php for javascript -->
+		<script type="text/javascript">var help_info = '<?php echo($help_info); ?>';</script>
 		<script type="text/javascript">var courses_json = <?php echo($courses_json); ?>;</script>
+
 		<script type="text/javascript" src="js/courses.js"></script>
 		<script type="text/javascript" src="js/tab-content.js"></script>
 		<script type="text/javascript" src="js/form.js"></script>
@@ -36,11 +38,12 @@
 
 					<div id="hidden"></div>
 					<div class="clear"></div>
-					<div id="form-submit" onclick="processForm()">Submit</div>
+					<div id="form-submit" class="button" onclick="processForm()">Submit</div>
+					<div id="help" class="button" onmouseover="updateTooltip()">Help</div>
 				</form>	
 			</div>
 
-			<div id="tooltip-div"><p id="tooltip"></p></div>
+			<div id="tooltip-div"><p id="tooltip"><?php echo $help_info; ?></p></div>
 		</div>
 
 		<div id="cmsc-tab-button" class="tab-button tab-button-active" onclick="changeTab('cmsc')"><p>Computer Science</p></div>

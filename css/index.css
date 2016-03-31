@@ -7,6 +7,8 @@ Light Blue Gray: #9FABB7
 Blue Gray: #535F6B
 Dark Blue Gray: #2F363D
 
+Light Brown: #BBBB77;
+
 Red: #FF0000
 Dark Red: #580000
 */
@@ -35,7 +37,7 @@ h1 {
 	font-size:40px;
 }
 
-label{
+label {
 	font-family: "Times New Roman", Times, serif;
 	font-size:23px;
 }
@@ -99,15 +101,18 @@ label {
 	color: #2F363D;
 }
 
-input[type="text"] {
+input {
 	width: 157px;
 	height: 25px;
 	line-height: 16px;
 	font-size: 16px;
 	border-radius:10px;
-	border-color:#647382;
+	border-color:#647382;	
 	padding: 0 7px;
 	border-style:solid;
+}
+input:focus {
+	border-color:#2F363D;
 }
 .form-error {
 	font-size: 16px;
@@ -115,7 +120,7 @@ input[type="text"] {
 	color: #FF0000;
 }
 
-#form-submit {
+.button {
 	background: #669900;
 	border-radius:15px;
 	padding: 7px 25px;
@@ -125,11 +130,15 @@ input[type="text"] {
 	font-size:22px;
 	color:#2F363D;
 }
-#form-submit:hover {
+.button:hover {
 	cursor: pointer;
 }
 #form-submit:active{
 	transform: translateY(2px);
+}
+#help {
+	float:left;
+	background-color: #BBBB77;
 }
 
 #tooltip-div {
@@ -174,7 +183,7 @@ input[type="text"] {
 	color: #2F363D;
 }
 .tab-button:hover{
-	background-color: #bbbb77;
+	background-color: #BBBB77;
 }
 .tab-button:active{
 	transform: translateY(2px);

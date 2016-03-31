@@ -27,6 +27,8 @@ getCoursesDebug()
 //run init() on completion of window load
 window.onload = init;
 
+var help;
+
 //all course objects
 var courses;
 
@@ -143,34 +145,41 @@ id - course id corresponding to a course object in the courses array
 Writes the course information associated with the provided course id to the
 innerHTML of the element with id "tooltip"
 */
-function updateTooltip(id) {
-	//get the course object based on id
-	var course = findCourse(id);
+function updateTooltip(id = "") {
+	var tooltip = document.getElementById("tooltip");
+	var tooltip_info = "";
 
-	//format the course information from the course object
-	var course_info = "";
-	course_info += "Course Name: " + course.name + "<br />";
-	course_info += "Course Description:<br />" + course.desc + "<br />";
-	course_info += "Prerequisites:<br />";
-
-	//format the prerequisite courses
-	var prereqs = course.prereqs;
-	if (prereqs.length == 0) {
-		course_info += "None<br />"
+	if (id == "") {
+		tooltip_info = help_info;
 	} else {
-		/* 
-		get the course objects for each prerequisite course and format the
-		information from that course object
-		*/
-		for (var i = 0; i < prereqs.length; i++) {
-			var prereq = findCourse(prereqs[i].id);
-			course_info += prereq.name + "<br />";
-		}		
+		//get the course object based on id
+		var course = findCourse(id);
+
+		//format the course information from the course object
+		tooltip_info += "<b>" + course.name + "</b><br />";
+		tooltip_info += course.desc + "<br />";
+		tooltip_info += "<b>Prerequisites</b><br />";
+
+		//format the prerequisite courses
+		var prereqs = course.prereqs;
+		if (prereqs.length == 0) {
+			tooltip_info += "None<br />"
+		} else {
+			/* 
+			get the course objects for each prerequisite course and format the
+			information from that course object
+			*/
+			for (var i = 0; i < prereqs.length; i++) {
+				var prereq = findCourse(prereqs[i].id);
+				tooltip_info += prereq.name + "<br />";
+			}		
+		}
+		tooltip_info += "<br />";		
 	}
-	course_info += "<br />";
+
 
 	//write the course info to the innerHTML of the element with id "tooltip"
-	document.getElementById("tooltip").innerHTML = course_info;
+	tooltip.innerHTML = tooltip_info;
 }
 
 /*
