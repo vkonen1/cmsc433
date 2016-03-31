@@ -47,14 +47,15 @@ label {
 	clear: both;
 }
 
-/* global warning for invalid user input */
+/* global warning for invalid user form interaction */
 #global-warning {
 	height: 50px;
 	width: 600px;
 
 	position: absolute;	
 	left: 150px;
-	top: 80px;
+	top: 65px;
+	z-index: 1;
 
 	border-radius: 10px;
 
