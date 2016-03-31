@@ -10,26 +10,51 @@
 	</head>
 
 	<body>
+		<br />
 		<h1>Computer Science Degree Tracker</h1>
-
+		<br />
 		<div id="global-warning" style="display: none;" onmouseover="toggleGlobalWarning(false)"></div>
 
-		<div id="north-west">
+		<div id="form-div">
 			<form>
+				<div id="id-box">
 				<label for="student_id">ID #:</label>
 				<input type="text" name="student_id">
+				</div>
+
+				<div id="name-box">
+				<label for="student_name">Name:</label>
+				<input type="text" name="student_name">
+				<br>
+				</div>
+
+				<div id="email-box">
+				<label for="student_email">Email:</label>
+				<input type="text" name="student_email">
+				<br>
+				</div>
+
+				<div id="year-box">
+				<label for="student_year">Year:</label>
+				<input type="text" name="student_year">
+				<br>
+				</div>
+
 				<div id="hidden"></div>
 				<input type="submit" value="Submit">
-			</form>
-			<br /><br /><br />
-			<button class="tab-button" onclick="changeTab('cmsc')">Computer</button>
-			<button class="tab-button" onclick="changeTab('math')">Math</button>
-			<button class="tab-button" onclick="changeTab('sci')">Science</button>
+			</form>	
 		</div>
 
-		<div id="north-east">
+		<div id="tip-div">
 			<textarea id="tooltip" disabled></textarea>
 		</div>
+
+		<div class="clear"></div>
+
+		<br /><br /><br />
+		<button class="tab-button" onclick="changeTab('cmsc')">Computer</button>
+		<button class="tab-button" onclick="changeTab('math')">Math</button>
+		<button class="tab-button" onclick="changeTab('sci')">Science</button>
 
 		<div class="clear"></div>
 

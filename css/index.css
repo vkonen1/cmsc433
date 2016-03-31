@@ -28,6 +28,12 @@ h1 {
 
 	text-align: center;
 	color: #2F363D;
+	font-size:40px;
+}
+
+label{
+	font-family: "Times New Roman", Times, serif;
+	font-size:25px;
 }
 
 /* used to clear floated elements */
@@ -63,27 +69,68 @@ h1 {
 	color: #FFFFFF;
 }
 
-#north-west {
-	float: left;
+input[type="text"]{
+	width: 250px;
+	height: 35px;
 }
-#north-east {
+input[type="submit"]{
+	background: #669900;
+	border-radius:15px;
+	padding: 10px 30px;
+	margin-top:10px;
+	margin-left:190px;
+	font-family: "Times New Roman", Times, serif;
+	font-size:21px;
+	font-color:white;
+}
+
+#form-div {
+	float: left;
+	margin-left:60px;
+	
+}
+#tip-div {
 	float: left;
 	margin-left: 50px;
 }
+
+#id-box{
+	margin-left:15px;
+}
+#year-box{
+	margin-left:14px;
+}
+
 #south {
 	float: left;
 	text-align: center;
 }
 #tooltip {
-	width: 290px;
-	height: 75px;	
+	width: 400px;
+	height: 230px;
+	background-color:#f1f2f4;	
+	border-style: none;
+	resize:none;
+	font-family: "Times New Roman", Times, serif;
 }
-
 
 .tab-button {
-	width: 110px;
-	height: 30px;
+	font-family: "Times New Roman", Times, serif;
+	font-size:30px;
+	width: 300px;
+	height: 60px;
+	border-radius:15px;
+	cursor: pointer;
+	float:left;
+	background-color: #647382;
 }
+.tab-button:hover{
+	background-color: #bbbb77;
+}
+.tab-button:active{
+	transform: translateY(5px);
+}
+
 
 /* tabs */
 #tab-content {
