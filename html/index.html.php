@@ -25,19 +25,16 @@
 				<div id="name-box">
 				<label for="student_name">Name:</label>
 				<input type="text" name="student_name">
-				<br>
 				</div>
 
 				<div id="email-box">
 				<label for="student_email">Email:</label>
 				<input type="text" name="student_email">
-				<br>
 				</div>
 
 				<div id="year-box">
 				<label for="student_year">Year:</label>
 				<input type="text" name="student_year">
-				<br>
 				</div>
 
 				<div id="hidden"></div>

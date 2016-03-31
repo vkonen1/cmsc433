@@ -33,7 +33,7 @@ h1 {
 
 label{
 	font-family: "Times New Roman", Times, serif;
-	font-size:25px;
+	font-size:23px;
 }
 
 /* used to clear floated elements */
@@ -72,12 +72,15 @@ label{
 input[type="text"]{
 	width: 250px;
 	height: 35px;
+	border-radius:10px;
+	border-color:#647382;
+	border-style:solid;
 }
 input[type="submit"]{
 	background: #669900;
 	border-radius:15px;
 	padding: 10px 30px;
-	margin-top:10px;
+	margin-top:8px;
 	margin-left:190px;
 	font-family: "Times New Roman", Times, serif;
 	font-size:21px;
@@ -96,8 +99,13 @@ input[type="submit"]{
 
 #id-box{
 	margin-left:15px;
+	margin-bottom:10px;
+}
+#email-box{
+	margin-top:10px;
 }
 #year-box{
+	margin-top:10px;
 	margin-left:14px;
 }
 
@@ -107,7 +115,7 @@ input[type="submit"]{
 }
 #tooltip {
 	width: 400px;
-	height: 230px;
+	height: 245px;
 	background-color:#f1f2f4;	
 	border-style: none;
 	resize:none;
