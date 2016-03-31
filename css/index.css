@@ -13,6 +13,8 @@ html {
 	background-color: #535F6B;
 }
 body {
+	position: relative;
+
 	width: 900px;
 
 	border: 3px #2F363D solid;
@@ -47,7 +49,7 @@ label{
 	width: 600px;
 
 	position: absolute;	
-	left: 35%;
+	left: 150px;
 	top: 80px;
 
 	border-radius: 10px;
