@@ -105,6 +105,8 @@ function changeTab(type) {
 	
 	//display the active tab based on type
 	document.getElementById(type + "-tab").style.display = "inline";
+
+	makeTabButtonActive(type);
 }
 
 /*

@@ -10,48 +10,37 @@
 	</head>
 
 	<body>
-		<br />
 		<h1>Computer Science Degree Tracker</h1>
-		<br />
 		<div id="global-warning" style="display: none;" onmouseover="toggleGlobalWarning(false)"></div>
+		<div id="top-section">
+			<div id="form">
+				<form>
+					<div class="form-section">
+						<label for="first_name">First Name:</label><br />
+						<input type="text" name="first_name"><br />
+						<label for="last_name">Last Name:</label><br />
+						<input type="text" name="last_name"><br />
+					</div>
 
-		<div id="form-div">
-			<form>
-				<div id="id-box">
-				<label for="student_id">ID #:</label>
-				<input type="text" name="student_id">
-				</div>
+					<div class="form-section">
+						<label for="email">Email:</label><br />
+						<input type="text" name="email"><br />
+						<label for="id">Student ID:</label><br />
+						<input type="text" name="id">
+					</div>
 
-				<div id="name-box">
-				<label for="student_name">Name:</label>
-				<input type="text" name="student_name">
-				</div>
+					<div id="hidden"></div>
+					<div class="clear"></div>
+					<div id="form-submit" onclick="processForm()">Submit</div>
+				</form>	
+			</div>
 
-				<div id="email-box">
-				<label for="student_email">Email:</label>
-				<input type="text" name="student_email">
-				</div>
-
-				<div id="year-box">
-				<label for="student_year">Year:</label>
-				<input type="text" name="student_year">
-				</div>
-
-				<div id="hidden"></div>
-				<input type="submit" value="Submit">
-			</form>	
+			<div id="tooltip-div"><p id="tooltip"></p></div>
 		</div>
 
-		<div id="tip-div">
-			<textarea id="tooltip" disabled></textarea>
-		</div>
-
-		<div class="clear"></div>
-
-		<br /><br /><br />
-		<button class="tab-button" onclick="changeTab('cmsc')">Computer</button>
-		<button class="tab-button" onclick="changeTab('math')">Math</button>
-		<button class="tab-button" onclick="changeTab('sci')">Science</button>
+		<div id="cmsc-tab-button" class="tab-button tab-button-active" onclick="changeTab('cmsc')"><p>Computer Science</p></div>
+		<div id="math-tab-button" class="tab-button" onclick="changeTab('math')"><p>Math</p></div>
+		<div id="sci-tab-button" class="tab-button" onclick="changeTab('sci')"><p>Science</p></div>
 
 		<div class="clear"></div>
 

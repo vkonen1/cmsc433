@@ -82,6 +82,17 @@ function initTabContent() {
 	});
 }
 
+function makeTabButtonActive(type) {
+	var buttons = document.getElementsByClassName("tab-button");
+	var button = document.getElementById(type + "-tab-button");
+
+	for (var i = 0; i < buttons.length; i++) {
+		buttons[i].className = "tab-button";
+	}
+
+	button.className += " tab-button-active";
+}
+
 /*
 adjustScrollContent(type)
 type - type of courses (cmsc, math, sci)
