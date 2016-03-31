@@ -33,42 +33,51 @@ function initTabContent() {
 	//cmsc
 	var cmsc_available = document.getElementById("cmsc-available");
 	cmsc_available.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "cmsc-available");
 	});
 	var cmsc_taken = document.getElementById("cmsc-taken");
 	cmsc_taken.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "cmsc-taken");
 	});
 	var cmsc_options = document.getElementById("cmsc-options");
 	cmsc_options.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "cmsc-options");
 	});
 
 	//math
 	var math_available = document.getElementById("math-available");
 	math_available.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "math-available");
 	});
 	var math_taken = document.getElementById("math-taken");
 	math_taken.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "math-taken");
 	});
 	var math_options = document.getElementById("math-options");
 	math_options.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "math-options");
 	});
 
 	//sci
 	var sci_available = document.getElementById("sci-available");
 	sci_available.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "sci-available");
 	});
 	var sci_taken = document.getElementById("sci-taken");
 	sci_taken.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "sci-taken");
 	});
 	var sci_options = document.getElementById("sci-options");
 	sci_options.addEventListener("wheel", function(event) {
+		event.preventDefault();
 		scrollTabContent(event, "sci-options");
 	});
 }
