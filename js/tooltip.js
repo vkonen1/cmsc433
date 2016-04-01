@@ -28,6 +28,28 @@ function initTooltipContent() {
 		event.preventDefault();
 		scrollTooltipContent(event);
 	});
+
+	/*
+	process up and down arrow keys as scrolling the tooltip content
+	*/
+	document.onkeydown = function(event) {
+		switch(event.which) {
+			//up arrow key pressed
+			case 38:
+				scrollTooltipContent(event, "up");
+				break;
+			//down arrow key pressed
+			case 40:
+				scrollTooltipContent(event, "down");
+				break;
+			//some other key pressed
+			default:
+				return;
+		}
+
+		//prevent scrolling of the whole window
+		event.preventDefault();
+	}
 }
 
 /*
@@ -87,10 +109,11 @@ function adjustTooltipContent() {
 
 /*
 scrollTooltipContent(event, id)
-event - a javascript wheel event object
+event 	  - a javascript wheel event object
+direction - direction to scroll the tooltip content (default is none)
 repositions the tooltip based on the wheel event
 */
-function scrollTooltipContent(event) {
+function scrollTooltipContent(event, direction = "") {
 	//get the tooltip area element
 	var tooltip = document.getElementById("tooltip");
 	//get the current offset height of the object
@@ -98,10 +121,18 @@ function scrollTooltipContent(event) {
 	//compute the relative top offset based on that value and the start one
 	var top = tooltip.offsetTop - tooltip_start_top + 10;
 
-	//normalize the scroll delta
-	var normal_delta = event.deltaY / event.deltaY;
-	if (event.deltaY < 0) {
-		normal_delta *= (-1);
+	//compute the normal delta based on event or direction if set
+	var normal_delta;
+	if (direction == "up") {
+		normal_delta = -1;
+	} else if (direction == "down") {
+		normal_delta = 1;
+	} else {
+		//normalize the scroll delta
+		normal_delta = event.deltaY / event.deltaY;
+		if (event.deltaY < 0) {
+			normal_delta *= (-1);
+		}		
 	}
 
 	//reverse the direction of the delta for scrolling

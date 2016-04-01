@@ -1,6 +1,7 @@
 <b>Help</b>
-Hover over a course to display pertinent information.
-Scroll within this area and within the lists below to navigate the content.
+Hover over a course to display pertinent information here.
+Use the mouse scroll wheel within this area and within the lists below to navigate the content.
+The up and down arrow keys may also be used to scroll the content in this area from any cursor location on the page.
 
 The three buttons below (Computer Science, Math, Science) navigate through tabs with lists of courses that are associated those requirement groups for the major.
 
