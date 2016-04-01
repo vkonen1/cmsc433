@@ -14,33 +14,41 @@ Light Greeen-----------#2F363D
 
 Red--------------------#FF0000
 Dark Red---------------#580000
+
+FORMAT:
+Styles for all selectors follow the format depicted in theformat_template.css
+file; Selector order follows the html layout
 */
 
+/* page background */
 html {
 	background-color: #535F6B;
 }
 body {
-	position: relative;
-
 	width: 900px;
 
-	border: 3px #2F363D solid;
-	border-radius: 10px;
-	
-	margin: 15px auto 30px;
-	
-	background-color: #FFFFFF;
-}
+	position: relative;
 
+	background-color: #FFFFFF;
+
+	border: 3px solid #2F363D;
+	border-radius: 10px;
+	margin: 15px auto 30px;
+
+	font-family: arial;
+}
+/* end page background */
+
+/* page header */
 h1 {
 	margin: 15px 0;
 
-	text-align: center;
 	color: #2F363D;
-	font-size:40px;
+	text-align: center;
+	font-size: 40px;
 }
 
-/* used to clear floated elements */
+/* used to clear float elements */
 .clear {
 	clear: both;
 }
@@ -55,11 +63,10 @@ h1 {
 	top: 65px;
 	z-index: 1;
 
-	border-radius: 10px;
+	background-color: #580000;
 
 	padding: 10px;
-
-	background-color: #580000;
+	border-radius: 10px;
 }
 #global-warning > p {
 	display: table-cell;
@@ -68,94 +75,74 @@ h1 {
 
 	vertical-align: middle;
 	
+	color: #FFFFFF;
 	text-align: center;
 	font-weight: bold;
 	font-size: 16px;
-	color: #FFFFFF;
 }
+/* end global warning */
 
-#tab-content-titles {
-	border-top: 3px #2F363D solid;
-	margin: 10px 0 0 0;
-}
-
-.tab-content-title {
-	height: 40px;
-	float: left;
-	border-right: 3px #2F363D solid;
-	width: 297px;
-	background-color: #C8CFD6;
-}
-.tab-content-title:last-child {
-	border: none;
-	width: 300px;
-}
-.tab-content-title > p {
-	display: table-cell;
-	height: 40px;
-	width: 297px;
-	font-size: 24px;
-	font-weight: bold;
-	margin: 0;
-	text-align: center;
-	vertical-align: middle;
-}
-
+/* top section */
 #top-section {
-	margin: 0 0 15px 0;
 	height: 140px;
-}
 
+	margin: 0 0 15px 0;
+}
+/* student data form */
 #form-div {
 	width: 365px;
-	margin: 0 15px;
-	float: left;
-}
 
-.form-section {
 	float: left;
+
+	margin: 0 15px;
+}
+.form-section {
 	width: 175px;
+
+	float: left;
+
 	margin: 0 15px 0 0;
 }
 .form-section:nth-child(2) {
 	margin: 0;
 }
-
-label {
-	font-family: "Times New Roman";
+.form-section > label {
+	color: #2F363D;
 	font-size: 16px;
 	font-weight: bold;
-	color: #2F363D;
-}
-
-input {
-	width: 157px;
-	height: 25px;
-	line-height: 16px;
-	font-size: 16px;
-	border-radius:10px;
-	border-color:#647382;	
-	padding: 0 7px;
-	border-style:solid;
-}
-input:focus {
-	border-color:#2F363D;
 }
 .form-error {
+	color: #FF0000;
 	font-size: 16px;
 	font-weight: bold;
-	color: #FF0000;
 }
+.form-section > input {
+	height: 25px;
+	width: 157px;
+	
+	padding: 0 7px;
+	border: 1px solid #647382;
+	border-radius: 10px;
+	margin: 0 0 5px 0;
 
+	line-height: 16px;
+	font-size: 16px;
+}
+.form-section > input:focus {
+	border-color: #2F363D;
+}
 .button {
-	background: #669900;
-	border-radius:15px;
-	padding: 7px 25px;
-	margin: 5px 0 0 0;
 	float: right;
-	font-family: "Times New Roman", Times, serif;
-	font-size:22px;
+
+	background-color: #669900;
+
+	padding: 7px 25px;
+	border-radius: 15px;
+	margin: 5px 0 0 0;
+
 	color: #2F363D;
+	font-size: 22px;
+	font-weight: bold;
 }
 .button:hover {
 	cursor: pointer;
@@ -165,37 +152,52 @@ input:focus {
 }
 #help {
 	float:left;
+
 	background-color: #BBBB77;
 }
+/* end student data form */
 
-#tooltip-div {
+/* tooltip area */
+#tooltip-container {
+	overflow: hidden;
+
+	height: 116px;
+	width: 466px;	
+	
 	position: relative;
 	float: left;
-	width: 466px;
-	height: 116px;
+
 	background-color: #C8CFD6;
+	
 	padding: 10px;
 	border: 2px solid #2F363D;
 	border-radius: 10px;
-	overflow: hidden;
 }
 
-#tooltip-div > p {
-	position: absolute;
-	top:10px;
+#tooltip-container > p {
 	width: 466px;
-	margin: 0;
-	font-family: "Times New Roman", Times, serif;
-}
 
+	position: absolute;
+	top: 10px;
+
+	margin: 0;
+}
+/* end tooltip area */
+/* end top section */
+
+/* tab buttons */
 .tab-button {
-	width: 290px;
-	margin: 0 5px;
-	height: 40px;
-	border-radius:15px;
 	cursor: pointer;
+
+	height: 40px;
+	width: 290px;
+
 	float:left;
+
 	background-color: #9FABB7;
+
+	border-radius: 15px;
+	margin: 0 5px;	
 }
 .tab-button > p {
 	display: table-cell;
@@ -203,13 +205,12 @@ input:focus {
 	height: 40px;
 	width: 300px;
 	
-	font-family: "Times New Roman", Times, serif;
 	vertical-align: middle;
 	
+	color: #2F363D;
 	text-align: center;
 	font-size: 24px;
 	font-weight: bold;
-	color: #2F363D;
 }
 .tab-button:hover{
 	background-color: #BBBB77;
@@ -220,14 +221,49 @@ input:focus {
 .tab-button-active {
 	background-color: #535F6B;
 }
+/* end tab buttons */
 
+/* tab content titles */
+#tab-content-titles {
+	border-top: 3px #2F363D solid;
+	margin: 10px 0 0 0;
+}
+.tab-content-title {
+	height: 40px;
+	width: 297px;
+	
+	float: left;
 
-/* tabs */
+	background-color: #C8CFD6;
+
+	border-right: 3px #2F363D solid;
+}
+.tab-content-title:last-child {
+	width: 300px;
+
+	border: none;
+}
+.tab-content-title > p {
+	display: table-cell;
+
+	height: 40px;
+	width: 297px;
+	
+	vertical-align: middle;
+
+	margin: 0;
+
+	color: #2F363D;
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+}
+/* end tab content titles */
+
+/* tab content */
 #tab-content {
 	border-top: 3px #2F363D solid;
 }
-
-/* select area sections */
 .course-section {
 	overflow: hidden;
 
@@ -236,39 +272,29 @@ input:focus {
 	
 	float: left;
 
-	border-right: 3px #2F363D solid;
-
 	padding: 15px 10px;
+	border-right: 3px solid #2F363D;
 }
 .course-section:last-child {
 	border-right: none;
 }
-
 .course-select {
 	position: relative;
 }
-
 /* course items in the tab select areas */
 .course-item {
 	height: 55px;
 
-	border-radius: 10px;
-
-	padding: 5px;
-	margin: 0 0 15px 0;
-
 	background-color: #9FABB7;
 
-	text-align: center;
-	font-weight: bold;
-	font-size: 14px;
+	margin: 0 0 15px 0;
+	border-radius: 10px;
+	padding: 5px;
 
-}
-.course-item:last-child {
-	margin: 0;
-}
-.course-item:hover {
-	cursor: pointer;
+	text-align: center;
+	font-size: 14px;
+	font-weight: bold;
+
 }
 .course-item > p {
 	display: table-cell;
@@ -278,7 +304,14 @@ input:focus {
 	
 	vertical-align: middle;
 	
+	color: #2F363D;
 	text-align: center;
 	font-size: 14px;
-	color: #2F363D;
 }
+.course-item:last-child {
+	margin: 0;
+}
+.course-item:hover {
+	cursor: pointer;
+}
+/* end tab content */

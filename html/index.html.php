@@ -62,7 +62,7 @@
 			</div>
 
 			<!-- the tooltip area initialized with the help_info.txt contents -->
-			<div id="tooltip-div"><p id="tooltip"><?php echo $help_info; ?></p></div>
+			<div id="tooltip-container"><p id="tooltip"><?php echo $help_info; ?></p></div>
 		</div>
 		<!-- end of top section -->
 
@@ -79,7 +79,7 @@
 			<div class="tab-content-title"><p>Taken</p></div>
 			<div class="tab-content-title"><p>Options</p></div>
 		</div>
-		
+
 		<div class="clear"></div>
 
 		<!-- tab content container -->
