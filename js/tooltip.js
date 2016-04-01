@@ -1,9 +1,17 @@
+/*
+Functions:
+initTooltipContent()
+updateTooltip(id)
+adjustTooltipContent()
+scrollTooltipContent(event, direction)
+*/
+
 //top offset from the top of the page
 var tooltip_start_top;
 
-//height in pixels of the selection areas
+//height in pixels of the tooltip area
 var tooltip_area_height = 140;
-//margin in pixels at the bottom of the tooltip area
+//combined padding in pixels of the top and bottom of the tooltip area
 var tooltip_area_padding = 20;
 
 //number of pixels to scroll per scroll event
@@ -17,8 +25,6 @@ function initTooltipContent() {
 	var tooltip = document.getElementById("tooltip");
 	//initialize the top offset
 	tooltip_start_top = tooltip.offsetTop;
-
-	console.log(tooltip_start_top);
 
 	/*
 	add an event listener to the tooltip area that calls scrollTooltipContent
