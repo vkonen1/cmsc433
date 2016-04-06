@@ -72,6 +72,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 		//select the database
 		$db = mysql_select_db($db_dbname, $mysql);
+
+		//query for the student based on the provided id
+		$query = "SELECT * FROM Students WHERE student_id = '$id'";
+		$result = mysql_query($query);
+		if (!$result) {
+			die("Error: " . mysql_error() . "<br />Query: " . $query);
+		}
+
+		//if they don't exist, add them
+		$num_results = mysql_num_rows($result);
+		if ($num_results < 1) {
+			$query = "INSERT INTO Students 
+				(student_id, student_first_name, student_last_name, student_email, date_added)
+				VALUES ('$id', '$first_name', '$last_name', '$email', CURRENT_TIMESTAMP)";
+			$result = mysql_query($query);
+			if (!$result) {
+				die("Error: " . mysql_error() . "<br />Query: " . $query);
+			}
+		//if they do exist update their information
+		} else {
+			$query = "UPDATE Students SET
+				student_first_name = '$first_name', student_last_name = '$last_name',
+				student_email = '$email' WHERE
+				student_id = '$id'";
+			$result = mysql_query($query);
+			if (!$result) {
+				die("Error: " . mysql_error() . "<br />Query: " . $query);
+			}
+		}
 	}
 }
 
