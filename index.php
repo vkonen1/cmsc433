@@ -2,6 +2,12 @@
 //defined functions
 require("functions.php");
 
+//database connection variables
+$db_server = "localhost";
+$db_username = "cmsc433";
+$db_password = "CMSC433group";
+$db_dbname = "cmsc433";
+
 //used for post data validation
 $error = false;
 $first_name = $last_name = $email = $id = "";
@@ -55,6 +61,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$error = true;
 			$idErr = "Invalid";
 		}
+	}
+
+	//add entry to the database if no form errors
+	if (!$error) {
+		//connect to the mysql server
+		$mysql = mysql_connect($db_server, $db_username, $db_password);
+		if (!$mysql) {
+			die("Could not connect to the database: " . mysql_error());
+		}
+		//select the database
+		$db = mysql_select_db($db_dbname, $mysql);
 	}
 }
 
