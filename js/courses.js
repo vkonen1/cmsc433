@@ -7,8 +7,6 @@ Courses Options - Courses that can be taken, based on courses taken
 
 Functions:
 init()
-changeTab(type)
-toggleGlobalWarning(message, timeout)
 findCourse(id)
 findCourseIndex(id, course_list)
 insertCourse(course, course_list)
@@ -44,9 +42,6 @@ var courses_options = [];
 courses_options["cmsc"] = [];
 courses_options["math"] = [];
 courses_options["sci"] = [];
-
-//timeout for the global warning
-var global_warning_timeout;
 
 /*
 init()
@@ -92,52 +87,6 @@ function init() {
 	//initialize the other scripts
 	initTooltipContent();
 	initTabContent();
-}
-
-/*
-changeTab(type)
-type - type of courses (cmsc, math, sci)
-Displays the active tab based on type and hides the others
-*/
-function changeTab(type) {
-	//get all of the tabs and hide them
-	var tabs = document.getElementsByClassName("tab");
-	for (var i = 0; i < tabs.length; i++) {
-		tabs[i].style.display = "none";
-	}
-	
-	//display the active tab based on type
-	document.getElementById(type + "-tab").style.display = "inline";
-
-	makeTabButtonActive(type);
-}
-
-/*
-toggleGlobalWarning(status, message, timeout)
-status  - indicates whether to show or hide the warning
-message - the message to put into the element with id "global-warning"
-timeout - time to wait until the message is hidden again (default 5 seconds)
-Toggles the display of the element with id "global-warning" and sets the
-contents to message, sets a timeout to hide the message
-*/
-function toggleGlobalWarning(status, message = "", timeout = 5000) {
-	//get the element with id "global-warning"
-	var global_warning = document.getElementById("global-warning");
-
-	//clear the global warning timeout
-	clearTimeout(global_warning_timeout);
-
-	//show the warning if status is true and set the timeout to hide it
-	if (status) {
-		global_warning.innerHTML = "<p>" + message + "</p>";
-		global_warning.style.display = "inline";
-		global_warning_timeout = setTimeout(function() {
-			global_warning.style.display = "none";
-		}, timeout);
-	//hide the warning	
-	} else {
-		global_warning.style.display = "none";
-	}
 }
 
 /*

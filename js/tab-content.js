@@ -1,9 +1,15 @@
 /*
 Functions:
 initTabContent()
+toggleGlobalWarning(message, timeout)
+changeTab(type)
+makeTabButtonActive(type)
 adjustScrollContent(type)
 scrollTabContent(event, id)
 */
+
+//timeout for the global warning
+var global_warning_timeout;
 
 //top offset from the top of the page
 var tab_start_top;
@@ -82,6 +88,58 @@ function initTabContent() {
 	});
 }
 
+/*
+toggleGlobalWarning(status, message, timeout)
+status  - indicates whether to show or hide the warning
+message - the message to put into the element with id "global-warning"
+timeout - time to wait until the message is hidden again (default 5 seconds)
+Toggles the display of the element with id "global-warning" and sets the
+contents to message, sets a timeout to hide the message
+*/
+function toggleGlobalWarning(status, message = "", timeout = 5000) {
+	//get the element with id "global-warning"
+	var global_warning = document.getElementById("global-warning");
+
+	//clear the global warning timeout
+	clearTimeout(global_warning_timeout);
+
+	//show the warning if status is true and set the timeout to hide it
+	if (status) {
+		global_warning.innerHTML = "<p>" + message + "</p>";
+		global_warning.style.display = "inline";
+		global_warning_timeout = setTimeout(function() {
+			global_warning.style.display = "none";
+		}, timeout);
+	//hide the warning	
+	} else {
+		global_warning.style.display = "none";
+	}
+}
+
+/*
+changeTab(type)
+type - type of courses (cmsc, math, sci)
+displays the active tab based on type and hides the others
+*/
+function changeTab(type) {
+	//get all of the tabs and hide them
+	var tabs = document.getElementsByClassName("tab");
+	for (var i = 0; i < tabs.length; i++) {
+		tabs[i].style.display = "none";
+	}
+	
+	//display the active tab based on type
+	document.getElementById(type + "-tab").style.display = "inline";
+
+	makeTabButtonActive(type);
+}
+
+/*
+makeTabButtonActive(type)
+type - type of courses (cmsc, math, sci)
+resets the classes of the tab buttons and adds the active class to the tab
+button of type
+*/
 function makeTabButtonActive(type) {
 	var buttons = document.getElementsByClassName("tab-button");
 	var button = document.getElementById(type + "-tab-button");
