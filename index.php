@@ -101,6 +101,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 				die("Error: " . mysql_error() . "<br />Query: " . $query);
 			}
 		}
+
+		//remove their previous submission of courses taken and options
+		$query = "DELETE FROM Students_Courses_Taken WHERE student_id = '$id'";
+		$result = mysql_query($query);
+		if (!$result) {
+			die("Error: " . mysql_error() . "<br />Query: " . $query);
+		}
+		$query = "DELETE FROM Students_Courses_Options WHERE student_id = '$id'";
+		$result = mysql_query($query);
+		if (!$result) {
+			die("Error: " . mysql_error() . "<br />Query: " . $query);
+		}
+
+		//insert the courses they have taken
+		$query = "INSERT INTO Students_Courses_Taken (student_id, course_id) VALUES";
+		$first = true;
+		foreach ($_POST["courses_taken"] as $course_id) {
+			if (!$first) {
+				$query .= ",";
+			}
+			$first = false;
+			$query .= " ('$id', '$course_id')";
+		}
+		$result = mysql_query($query);
+		if (!$result) {
+			die("Error: " . mysql_error() . "<br />Query: " . $query);
+		}
+
+		//insert the courses they have as options
+		$query = "INSERT INTO Students_Courses_Options (student_id, course_id) VALUES";
+		$first = true;
+		foreach ($_POST["courses_options"] as $course_id) {
+			if (!$first) {
+				$query .= ",";
+			}
+			$first = false;
+			$query .= " ('$id', '$course_id')";
+		}
+		$result = mysql_query($query);
+		if (!$result) {
+			die("Error: " . mysql_error() . "<br />Query: " . $query);
+		}
+
+		require("html/index-thanks.html.php");
+		exit;
 	}
 }
 

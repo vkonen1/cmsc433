@@ -72,6 +72,7 @@ h1 {
 	display: table-cell;
 
 	height: 50px;
+	width: 600px;
 
 	vertical-align: middle;
 	
@@ -315,3 +316,15 @@ h1 {
 	cursor: pointer;
 }
 /* end tab content */
+
+/* thank you text */
+.thanks {
+	width: 870px;
+
+	margin: 0 15px 15px;
+
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+}
+/* end thank you text */

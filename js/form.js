@@ -1,6 +1,12 @@
 function processForm() {
 	var hidden_content = "";
 
+	if (!coursesTaken()) {
+		var message = "Please select at least one class as taken.";
+		toggleGlobalWarning(true, message);
+		return;
+	}
+
 	//generate the hidden form fields for each course taken
 	for (var i = 0; i < courses_taken["cmsc"].length; i++) {
 		hidden_content += generateHidden(courses_taken["cmsc"][i], "taken");
@@ -28,6 +34,12 @@ function processForm() {
 
 	//submit the form
 	document.getElementById("form").submit();
+}
+
+function coursesTaken() {
+	return courses_taken["cmsc"].length != 0 ||
+		courses_taken["math"].length != 0 ||
+		courses_taken["sci"].length != 0;
 }
 
 function generateHidden(course, type) {
