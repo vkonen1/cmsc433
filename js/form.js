@@ -1,6 +1,20 @@
+/*
+Functions:
+processForm()
+coursesTaken()
+generateHidden(course, type)
+*/
+
+/*
+processForm()
+ensures at least one class has been taken then generates hidden input fields
+of the course ids from the courses taken and courses options objects of each
+class type then submits the form
+*/
 function processForm() {
 	var hidden_content = "";
 
+	//make sure one class has been taken
 	if (!coursesTaken()) {
 		var message = "Please select at least one class as taken.";
 		toggleGlobalWarning(true, message);
@@ -36,12 +50,23 @@ function processForm() {
 	document.getElementById("form").submit();
 }
 
+/*
+coursesTaken()
+returns true if at least one class has been taken, otherwise false
+*/
 function coursesTaken() {
 	return courses_taken["cmsc"].length != 0 ||
 		courses_taken["math"].length != 0 ||
 		courses_taken["sci"].length != 0;
 }
 
+/*
+generateHidden(course, type)
+course - a course object
+type   - taken or options (hidden field array naming)
+returns a string of an html input field with the name asocciated with the type
+and value of the course id from the course object
+*/
 function generateHidden(course, type) {
 	return "<input type=\"hidden\" name=\"courses_" + type + "[]\" value=\"" + course.id + "\" />";
 }

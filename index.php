@@ -144,6 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			die("Error: " . mysql_error() . "<br />Query: " . $query);
 		}
 
+		//include the html file for the thank you page
 		require("html/index-thanks.html.php");
 		exit;
 	}
