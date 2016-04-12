@@ -333,6 +333,12 @@ h1 {
 .course-item:hover {
 	cursor: pointer;
 }
+.course-required {
+	background-color: #580000;
+}
+.course-required > p {
+	color: #FFFFFF;
+}
 /* end tab content */
 
 /* thank you text */

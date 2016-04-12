@@ -288,8 +288,12 @@ function updateSelections(type) {
 		onclick 	- call classTaken(id, type) with the course object id and
 					  type
 		*/
-		available_select_content += "<div class='course-item' value=\"";
-		available_select_content += courses_available[type][i].id;
+
+		available_select_content += "<div class=\"course-item";
+		if (courses_available[type][i].required == "1") {
+			available_select_content += " course-required";
+		}
+		available_select_content += "\" value=\"" + courses_available[type][i].id;
 		available_select_content += "\" onmouseover=\"updateTooltip('";
 		available_select_content += courses_available[type][i].id;
 		available_select_content += "')\" onclick=\"classTaken('";
@@ -311,8 +315,11 @@ function updateSelections(type) {
 		onclick 	- call classUntaken(id, type) with the course object id and
 					  type
 		*/
-		taken_select_content += "<div class='course-item' value=\"";
-		taken_select_content += courses_taken[type][i].id;
+		taken_select_content += "<div class=\"course-item";
+		if (courses_taken[type][i].required == "1") {
+			taken_select_content += " course-required";
+		}
+		taken_select_content += "\" value=\"" + courses_taken[type][i].id;
 		taken_select_content += "\" onmouseover=\"updateTooltip('";
 		taken_select_content += courses_taken[type][i].id;
 		taken_select_content += "')\" onclick=\"classUntaken('";
@@ -332,8 +339,11 @@ function updateSelections(type) {
 		value 		- value of the element is the course object id
 		onmouseover - call updateTooltip(id) with the course object id
 		*/
-		options_select_content += "<div class='course-item' value=\"";
-		options_select_content += courses_options[type][i].id;
+		options_select_content += "<div class=\"course-item";
+		if (courses_options[type][i].required == "1") {
+			options_select_content += " course-required";
+		}
+		options_select_content += "\" value=\"" + courses_options[type][i].id;
 		options_select_content += "\" onmouseover=\"updateTooltip('"
 		options_select_content += courses_options[type][i].id;
 		options_select_content += "')\"><p>";

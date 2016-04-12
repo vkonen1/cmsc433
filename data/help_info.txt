@@ -5,4 +5,6 @@ The up and down arrow keys may also be used to scroll the content in this area f
 
 The three buttons below (Computer Science, Math, Science) navigate through tabs with lists of courses that are associated those requirement groups for the major.
 
+Courses that are colored red indicate that course is required for completion of the Computer Science major.
+
 Clicking on a course in the available list moves that course and all prerequisite courses to the taken list. Options are updated automatically based on the courses taken.
