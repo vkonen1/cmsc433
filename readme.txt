@@ -31,15 +31,15 @@ following columns
 
 course_id       - unique course id from the UMBC course catalog left padded with
                   zeroes to a length of 6
-course_type 	- type of course for tab association (cmsc, math, sci)
-course_credits 	- number of credits (unused information)
+course_type     - type of course for tab association (cmsc, math, sci)
+course_credits  - number of credits (unused information)
 course_required - course required for the major or not (1 or 0)
-course_senior 	- course counts as a CMSC 400 level course or not (1 or 0), used
+course_senior   - course counts as a CMSC 400 level course or not (1 or 0), used
                   to determine if one CMSC 400 level course prerequisite is
                   fulfilled for CMSC 447
-course_name 	- name of the course from the UMBC course catalog
-course_desc 	- description of the course from the UMBC course catalog
-course_prereqs 	- number of prerequisite courses (used for building JSON)
+course_name     - name of the course from the UMBC course catalog
+course_desc     - description of the course from the UMBC course catalog
+course_prereqs  - number of prerequisite courses (used for building JSON)
 
 All course ids are additionally stored as entries in the Prereqs table
 
@@ -57,13 +57,13 @@ These tables described below are used to store the data entered by the user
 Students are stored in the database as entries in the Students table with the
 following columns
 
-student_id		   - unique student UMBC id
+student_id         - unique student UMBC id
 student_first_name - first name of the student
 student_last_name  - last name of the student
-student_email	   - email address of the student
-date_modified	   - date this entry was last modified (automatically updated
+student_email      - email address of the student
+date_modified      - date this entry was last modified (automatically updated
                      with CURRENT_TIMESTAMP)
-date_added		   - date this entry was added (need to provide
+date_added         - date this entry was added (need to provide
                      CURRENT_TIMESTAMP on insert)
 
 Both the Students_Courses_Options and Students_Courses_Taken tables have entries
