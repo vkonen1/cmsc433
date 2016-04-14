@@ -99,3 +99,53 @@ template files based on the state of the page
 HTML/PHP Files (html/*.html.php)
 
 * index.html.php *
+This is the main HTML/PHP files required by index.php that includes the
+necessary css and javascript files for the page to function, and contains the
+markup for the form, tooltip, and course selection areas
+
+* index-thanks.html.php *
+This file is included by index.php when user input has been validated and
+successfully entered into the database to notify them of successful submission
+/------------------------------------------------------------------------------/
+CSS Files (css/*.css)
+
+* format_template.css *
+This is a non-functioning css file that serves to depict a template guide for
+styling elements; All styles within selectors for index.css follow this ordering
+
+* index.css *
+The main CSS file for the page that contains all of the necessary styling and
+conforms to format_template.css ordering; Hex codes for colors used are
+indicated in the header comment; The order of the selectors follows their
+respective order within the HTML
+/------------------------------------------------------------------------------/
+JavaScript Files (js/*.js)
+
+The JavaScript files include a header comment naming all of the functions
+within that particular file and each function's exact use is documented; All of
+the JavaScript files are used only by html/index.html.php
+
+* courses.js *
+This file contains all of the required functionality to manipulate the
+JavaScript course objects for each course type (available, taken, options)
+
+* tooltip.js *
+This file contains all of the required functionality to manipulate the tooltip
+content and scrolling capabilities
+
+* tab-content.js *
+This file contains all of the required functionality to manipulate the selection
+areas for each of the "tabs" and scrolling capabilities for those areas
+
+* form.js *
+This file processes the form on submission by generating hidden input fields
+for the course objects to pass with the post data
+/------------------------------------------------------------------------------/
+Data Files (data/*)
+
+This directory is intended to contain any necessary data files that are not json
+
+* help_info.txt *
+This file is parsed within index.php and passed to JavasScript within
+html/index.html.php and represent the help information within the tooltip area
+/------------------------------------------------------------------------------/
